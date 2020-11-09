@@ -16,6 +16,9 @@
     "url": "https://github.com/lightme-fan/country-quiz/issues"
   },
   "homepage": "https://github.com/lightme-fan/country-quiz#readme",
+  "browserslist": [
+		"last 1 chrome versions"
+	],
   "dependencies": {
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
