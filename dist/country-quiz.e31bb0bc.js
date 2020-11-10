@@ -29772,7 +29772,58 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/App.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/Quiz-question.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+const questions = [{
+  question1: 'is the capital of ',
+  id: 'question'
+}, {
+  question2: 'Wich country does this flag belong to ?',
+  id: 'question'
+}];
+var _default = questions;
+exports.default = _default;
+},{}],"components/DisplayQuiz.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _QuizQuestion = _interopRequireDefault(require("./Quiz-question"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function DisplayQuiz({
+  flag,
+  question,
+  capital,
+  answers
+}) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, question.question1 ? /*#__PURE__*/_react.default.createElement("h3", {
+    className: "question"
+  }, capital, " ", question.question1) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+    className: "question-image",
+    src: flag,
+    alt: capital
+  }), /*#__PURE__*/_react.default.createElement("h3", {
+    className: "question"
+  }, question.question2)), /*#__PURE__*/_react.default.createElement("div", {
+    className: "buttons"
+  }, /*#__PURE__*/_react.default.createElement("button", null, answers[0]), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", null, answers[1]), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", null, answers[2]), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", null, answers[3])));
+}
+
+var _default = DisplayQuiz;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","./Quiz-question":"components/Quiz-question.js"}],"components/useFetchQuiz.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29782,42 +29833,94 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _QuizQuestion = _interopRequireDefault(require("./Quiz-question"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const region_API = 'https://restcountries.eu/rest/v2/regionalbloc/';
-const city_API = 'https://restcountries.eu/rest/v2/';
-const field_Api = '?fields=';
-const cap = 'https://restcountries.eu/rest/v2/all?fields=name;capital;flag';
-const API = 'https://restcountries.eu/rest/v2/all';
+const API_url = 'https://restcountries.eu/rest/v2/all';
 
-function App() {
-  const quizObj = {
-    question: '',
-    answers: [],
-    correctAnswer: '',
-    flag: '',
-    id: ''
-  };
-  const [data, setData] = (0, _react.useState)([quizObj]);
+function useFetchQuiz() {
+  const [quizes, setQuiz] = (0, _react.useState)([]);
 
-  async function fetchData() {
-    const response = await fetch(cap);
-    const result = await response.json();
-    setData(...data, result);
-  }
+  async function fetchData(id) {
+    const response = await fetch(API_url);
+    const result = await response.json(); // Randomizing questions
+
+    const randomQuestion = _QuizQuestion.default[Math.floor(Math.random() * _QuizQuestion.default.length)]; // Randomizing answers
+
+
+    const randomizingAnswers = result[Math.floor(Math.random() * result.length)]; // Randomizing option of answers
+
+    const opt1 = result[Math.floor(Math.random() * result.length)];
+    const opt2 = result[Math.floor(Math.random() * result.length)];
+    const opt3 = result[Math.floor(Math.random() * result.length)]; // Answers
+
+    const options = [randomizingAnswers.name, opt1.name, opt2.name, opt3.name];
+    const sortedOptions = options.sort(() => {
+      return 0.5 - Math.random();
+    }); // Question
+
+    const allQuestions = [randomQuestion.question1 ? `${randomizingAnswers.capital} ${randomQuestion.question1}` : `${randomQuestion.question2}`]; // const allQuestions = [ `${randomQuestion.question1}`, `${randomQuestion.question2}`]
+
+    const quizObj = {
+      question: randomQuestion,
+      countries: randomizingAnswers,
+      flag: randomizingAnswers.flag,
+      capital: randomizingAnswers.capital,
+      answers: sortedOptions,
+      correctAnswer: randomizingAnswers.name,
+      isCorrect: true
+    }; // Set state
+
+    setQuiz([quizObj]);
+  } // useEffect
+
 
   (0, _react.useEffect)(() => {
     fetchData();
   }, []);
-  console.log(data);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h1", null, "Hello World!"));
+  return [quizes];
+}
+
+var _default = useFetchQuiz;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","./Quiz-question":"components/Quiz-question.js"}],"components/App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _DisplayQuiz = _interopRequireDefault(require("./DisplayQuiz"));
+
+var _useFetchQuiz = _interopRequireDefault(require("./useFetchQuiz"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function App() {
+  const [quizes] = (0, _useFetchQuiz.default)();
+  console.log(quizes);
+  return /*#__PURE__*/_react.default.createElement("article", {
+    className: "quiz-container"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Country Quiz"), quizes.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, _extends({
+    key: quiz.capital
+  }, quiz)))));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./DisplayQuiz":"components/DisplayQuiz.js","./useFetchQuiz":"components/useFetchQuiz.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -29857,7 +29960,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52542" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63041" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

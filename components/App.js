@@ -1,41 +1,20 @@
-import React, { useEffect, useState } from 'react';
-
-const region_API = 'https://restcountries.eu/rest/v2/regionalbloc/'
-const city_API = 'https://restcountries.eu/rest/v2/';
-const field_Api = '?fields='
-const cap = 'https://restcountries.eu/rest/v2/all?fields=name;capital;flag'
-
-const API = 'https://restcountries.eu/rest/v2/all'
+import React from 'react';
+import DisplayQuiz from './DisplayQuiz';
+import useFetchQuiz from './useFetchQuiz'
 
 function App() {
-
-    const quizObj = {
-        question: '',
-        answers: [],
-        correctAnswer: '',
-        flag: '',
-        id: ''
-    }
-
-    const [ data, setData ] = useState([quizObj])
-
-    async function fetchData() {
-        const response = await fetch(cap)
-        const result = await response.json()
-        setData(...data, result)
-    }
-    
-    useEffect(() => {
-        fetchData()
-    }, [])
-    
-    console.log(data);
+    const [ quizes ] = useFetchQuiz()  
+    console.log(quizes);
 
     return (
-        <>
-            {/* {data.map(item => <p>{item.name}</p>)} */}
-            <h1>Hello World!</h1>
-        </>
+        <article className='quiz-container'>
+            <div className='container'>
+                <h1>Country Quiz</h1>
+                {quizes.map(quiz =>                    
+                    <DisplayQuiz key={quiz.capital} {...quiz}/>
+                )}
+            </div>
+        </article>
     )
 }
 
