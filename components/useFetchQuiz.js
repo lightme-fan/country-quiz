@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import NextButton from './NextButton';
 import quizQuestions from './Quiz-question'
 
 const API_url = 'https://restcountries.eu/rest/v2/all'
 
 function useFetchQuiz() {
-    const [ quizes, setQuiz ] = useState([])  
+    const [ quizes, setQuiz ] = useState([]) 
+    const [ score, setScore ] = useState(0)  
+    const [ button, setbutton ] = useState(null)
     
     async function fetchData(id) {
         const response = await fetch(API_url)
@@ -36,8 +39,12 @@ function useFetchQuiz() {
             capital: randomizingAnswers.capital,
             answers: sortedOptions,
             correctAnswer: randomizingAnswers.name,
-            isCorrect: true
+            userAnswer: '',
+            isCorrect: false,
+            background: {backgroundColor: '#ffffff'},
+            displayContainer: false
         }
+
         // Set state
         setQuiz([quizObj])
 
@@ -47,8 +54,23 @@ function useFetchQuiz() {
     useEffect(() => {
         fetchData()
     }, [])
+
+
+    function handleClick(e) {
+        const userGuess = e.target.value
+        setbutton(NextButton)
+        const findAnswer = quizes.find(quiz => quiz.correctAnswer);
+        
+        if (findAnswer.correctAnswer === userGuess) {
+            setScore(prev => prev + 1)            
+        } 
+    }
     
-    return [quizes]
+    function handleNextButton(e) {
+        console.log(e.target.value);    
+    }
+
+    return [quizes, button, score, handleClick, handleNextButton]
 }
 
 export default useFetchQuiz
