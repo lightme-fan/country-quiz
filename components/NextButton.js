@@ -1,11 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Router } from 'react-router-dom'
+import useFetchQuiz from './useFetchQuiz'
 
-function NextButton() {
+function NextButton({ isCorrect, onClick }) {
+
     return (
-        <button className='next-button'>
-            Next
-        </button>
+        <>  {isCorrect ?
+            <Link to='/'>
+                <button className='next-button'>
+                    Next
+                </button>
+            </Link> :
+            <Link to='/result'>
+                <button className='next-button' onClick={onClick}>
+                    Next
+                </button>
+            </Link>}
+        </>
     )
 }
 

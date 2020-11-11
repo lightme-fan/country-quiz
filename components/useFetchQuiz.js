@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import NextButton from './NextButton';
 import quizQuestions from './Quiz-question'
+import Results from './Results';
 
 const API_url = 'https://restcountries.eu/rest/v2/all'
 
 function useFetchQuiz() {
     const [ quizes, setQuiz ] = useState([]) 
     const [ score, setScore ] = useState(0)  
-    const [ button, setbutton ] = useState(null)
+    const [ button, setbutton ] = useState(false)
+    const [ nextPage, setNextPage ] = useState(null)
+    const [ classList, setClass ] = useState('')
     
     async function fetchData(id) {
         const response = await fetch(API_url)
@@ -41,8 +44,6 @@ function useFetchQuiz() {
             correctAnswer: randomizingAnswers.name,
             userAnswer: '',
             isCorrect: false,
-            background: {backgroundColor: '#ffffff'},
-            displayContainer: false
         }
 
         // Set state
@@ -55,22 +56,29 @@ function useFetchQuiz() {
         fetchData()
     }, [])
 
-
+    console.log(quizes);
     function handleClick(e) {
-        const userGuess = e.target.value
-        setbutton(NextButton)
+        const userGuess = e.target
+        setbutton(true)
         const findAnswer = quizes.find(quiz => quiz.correctAnswer);
         
-        if (findAnswer.correctAnswer === userGuess) {
-            setScore(prev => prev + 1)            
+        if (userGuess.value == findAnswer.correctAnswer) {
+            userGuess.classList.add('true')
+            setScore(prev => prev + 1)
+        } else if (userGuess !== findAnswer.correctAnswer) {
+            userGuess.classList.add('untrue')
+            // userGuess.classList.add('true')
         } 
     }
-    
-    function handleNextButton(e) {
-        console.log(e.target.value);    
-    }
 
-    return [quizes, button, score, handleClick, handleNextButton]
+    function handleNextButton(e) {
+        const nextButtonValue = e.target;
+        console.log(nextButtonValue);
+        const findAnswer = quizes.find(quiz => quiz.correctAnswer);        
+        fetchData()
+    }
+    
+    return [classList, quizes, button, nextPage, score, handleClick, handleNextButton]
 }
 
 export default useFetchQuiz

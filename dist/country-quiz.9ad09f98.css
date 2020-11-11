@@ -37,6 +37,10 @@ button {
     height: 56px;
 }
 
+/* .buttons > button:hover {
+    background-color: #F9A826;
+} */
+
 .next-button {
     height: 36px;
     background: #F9A826;
@@ -46,6 +50,39 @@ button {
     border: none;
     margin-bottom: 0;
     margin-left: 80%;
+}
+
+.untrue {
+    background-color: #EA8282;
+}
+
+.true {
+    background-color: #60BF88;
+}
+
+.all-button {
+    background-color: #fff;
+}
+
+.result {
+    text-align: center;
+}
+
+.result--heading {
+    padding-top: 150px;
+    text-transform: uppercase;
+}
+
+.result--button {
+    width: 33%;
+    height: 48px;
+    margin-top: 25px;
+}
+
+.result--text > span {
+    color: #60BF88;
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 /*# sourceMappingURL=/country-quiz.9ad09f98.css.map */
