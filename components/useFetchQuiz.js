@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import ButtonNext from '../Test';
 import NextButton from './NextButton';
 import quizQuestions from './Quiz-question'
-import Results from './Results';
+import Results from './TryAgain';
 
 const API_url = 'https://restcountries.eu/rest/v2/all'
 
@@ -9,6 +10,7 @@ function useFetchQuiz() {
     const [ quizes, setQuiz ] = useState([]) 
     const [ score, setScore ] = useState(0)  
     const [ button, setbutton ] = useState(false)
+    const [ isCorrect, setIsCorrect ] =useState(false)
     const [ nextPage, setNextPage ] = useState(false)
     const [ classList, setClass ] = useState('')
     
@@ -39,7 +41,6 @@ function useFetchQuiz() {
             answers: sortedOptions,
             correctAnswer: randomizingAnswers.name,
             userAnswer: '',
-            isCorrect: true,
         }
 
         // Set state
@@ -52,31 +53,58 @@ function useFetchQuiz() {
         fetchData()
     }, [])
 
-    function handleClick(e) {
+    
+    function handleTrueValue(e) {
         const userGuess = e.target
         setbutton(true)
         const findAnswer = quizes.find(quiz => quiz.correctAnswer);
-        
+   
         if (userGuess.value == findAnswer.correctAnswer) {
             userGuess.classList.add('true')
-            setScore(prev => prev + 1)
-            console.log(score);
-        } else if (userGuess !== findAnswer.correctAnswer) {
-            userGuess.classList.add('untrue')           
-        } 
+            console.log(findAnswer.correctAnswer);
+            setIsCorrect(true)
+            userGuess.classList.add('untrue') 
+        }
+    }
+
+    function handleFalseValue(e) {        
+        const userGuess = e.target
+        setbutton(true)
+        const findAnswer = quizes.find(quiz => quiz.correctAnswer);
+    
+        if (userGuess !== findAnswer.correctAnswer) {
+            userGuess.classList.add('untrue')
+            findAnswer.correctAnswer           
+        }
+    }
+
+    function handleClick(e) {                 
+        handleTrueValue(e)
+        handleFalseValue(e)
     }
     
     function handleNextButton (e) {
         const userGuess = e.target
-        const findAnswer = quizes.find(quiz => quiz.correctAnswer);
-        
-        if (userGuess.value === findAnswer.correctAnswer) {
-            console.log(score);
+        // console.log(userGuess.value);
+        // const findAnswer = quizes.find(quiz => quiz.correctAnswer);
+        // console.log(findAnswer.correctAnswer);
+        // setScore(prev => prev + 1)
+        // setIsCorrect(true)
+        // fetchData()
+        const buttons = Array.from(document.querySelectorAll(".btn"))
+        const findButtomValue = buttons.find(button => button.classList)
+        const foundValue = findButtomValue.value;
+        const trueValue = handleTrueValue(e)
+        if (foundValue) {
+            console.log(foundValue);
+            console.log(userGuess.value);
             fetchData()
-        } 
+        }
+        
     }
+    console.log(quizes);
     
-    return [classList, quizes, button, nextPage, score, handleClick, handleNextButton]
+    return [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton]
 }
 
 export default useFetchQuiz

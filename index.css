@@ -36,9 +36,17 @@ button {
     height: 56px;
 }
 
-/* .buttons > button:hover {
+.buttons > button:hover {
     background-color: #F9A826;
-} */
+}
+
+.untrue {
+    background-color: #EA8282;
+}
+
+.true {
+    background-color: #60BF88;
+}
 
 .next-button {
     height: 36px;
@@ -50,13 +58,9 @@ button {
     margin-bottom: 0;
     margin-left: 80%;
 }
-
-.untrue {
-    background-color: #EA8282;
-}
-
-.true {
-    background-color: #60BF88;
+.next-button--anchor {
+    height: 36px;
+    width: 20%;
 }
 
 .all-button {

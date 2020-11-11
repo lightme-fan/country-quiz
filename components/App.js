@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import FirstPage from './First-page';
-import Results from './Results';
+import NextButton from './NextButton';
+import TryAgain from './TryAgain';
 import useFetchQuiz from './useFetchQuiz'
 
 function App() {
-    const [classList, quizes, button, nextPage, score, handleClick, handleNextButton] = useFetchQuiz() 
+    const [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton] = useFetchQuiz() 
     
     return (        
         <article className='quiz-container'>
             <h1>Country Quiz</h1>
             <Router>
                 <Switch>
-                    <Route path='/'>
+                    <Route exact path='/'>
                         <FirstPage/>
                     </Route>
-                    <Route path='/result'>
-                        <Results />
+                    <Route path='/tryagain'>
+                        {!nextPage && <TryAgain/>}
                     </Route>
-                    <Route path='/home'>
+                    <Route path='/backtohome'>
                         <FirstPage/>
                     </Route>
                 </Switch>

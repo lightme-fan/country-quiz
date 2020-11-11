@@ -2,16 +2,17 @@ import React from 'react'
 import { Link, Router } from 'react-router-dom'
 import useFetchQuiz from './useFetchQuiz'
 
-function NextButton({ nextPage, isCorrect,  onClick, correctAnswer, resultOnClick }) {
-
+function NextButton({ correctAnswer }) {
+    const [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton] = useFetchQuiz()
     return (
         <>  
-            {!isCorrect && correctAnswer ?
-                <button value={correctAnswer} className='next-button' onClick={onClick}>
+            {isCorrect ?
+                <button value={correctAnswer} className='next-button' onClick={handleNextButton}>
                     Next
-                </button> :
-                <Link to='/result'>
-                    <button className='next-button' value={correctAnswer} onClick={resultOnClick}>
+                </button>
+                :
+                <Link className='next-button--anchor' to='/tryagain'>
+                    <button className='next-button'>
                         Next
                     </button>
                 </Link> 
