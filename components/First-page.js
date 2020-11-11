@@ -10,7 +10,7 @@ function FirstPage() {
             {quizes.map(quiz =>                    
                 <DisplayQuiz onClick={handleClick} key={quiz.capital} {...quiz} classList={classList}/>
                 )}                                
-            {button && quizes.map(quiz => <NextButton key={quiz.capital} {...quiz} onClick={handleNextButton} />)}
+            {button && quizes.map(quiz => <NextButton key={quiz.capital} {...quiz} resultOnClick={handleNextButton} /> )}
         </div>
     )
 }

@@ -5,12 +5,11 @@ body {
 .quiz-container {
     max-width: 500px;
     margin: auto;
-    padding: 1rem;
 }
 
 .container {
     background-color: #fff;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 24px;
     position: relative;
 }
@@ -29,7 +28,7 @@ h1 {
 
 button {
     border-radius: 12px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
 }
 
 .buttons > button {

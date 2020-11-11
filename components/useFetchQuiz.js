@@ -9,7 +9,7 @@ function useFetchQuiz() {
     const [ quizes, setQuiz ] = useState([]) 
     const [ score, setScore ] = useState(0)  
     const [ button, setbutton ] = useState(false)
-    const [ nextPage, setNextPage ] = useState(null)
+    const [ nextPage, setNextPage ] = useState(false)
     const [ classList, setClass ] = useState('')
     
     async function fetchData(id) {
@@ -31,10 +31,6 @@ function useFetchQuiz() {
         const options = [ randomizingAnswers.name, opt1.name, opt2.name, opt3.name]
         const sortedOptions = options.sort(() => { return 0.5 - Math.random() });
 
-        // Question
-        const allQuestions = [ randomQuestion.question1 ? `${randomizingAnswers.capital} ${randomQuestion.question1}` : `${randomQuestion.question2}`]
-        // const allQuestions = [ `${randomQuestion.question1}`, `${randomQuestion.question2}`]
-        
         const quizObj = {
             question: randomQuestion,
             countries: randomizingAnswers,
@@ -43,7 +39,7 @@ function useFetchQuiz() {
             answers: sortedOptions,
             correctAnswer: randomizingAnswers.name,
             userAnswer: '',
-            isCorrect: false,
+            isCorrect: true,
         }
 
         // Set state
@@ -56,7 +52,6 @@ function useFetchQuiz() {
         fetchData()
     }, [])
 
-    console.log(quizes);
     function handleClick(e) {
         const userGuess = e.target
         setbutton(true)
@@ -65,17 +60,20 @@ function useFetchQuiz() {
         if (userGuess.value == findAnswer.correctAnswer) {
             userGuess.classList.add('true')
             setScore(prev => prev + 1)
+            console.log(score);
         } else if (userGuess !== findAnswer.correctAnswer) {
-            userGuess.classList.add('untrue')
-            // userGuess.classList.add('true')
+            userGuess.classList.add('untrue')           
         } 
     }
-
-    function handleNextButton(e) {
-        const nextButtonValue = e.target;
-        console.log(nextButtonValue);
-        const findAnswer = quizes.find(quiz => quiz.correctAnswer);        
-        fetchData()
+    
+    function handleNextButton (e) {
+        const userGuess = e.target
+        const findAnswer = quizes.find(quiz => quiz.correctAnswer);
+        
+        if (userGuess.value === findAnswer.correctAnswer) {
+            console.log(score);
+            fetchData()
+        } 
     }
     
     return [classList, quizes, button, nextPage, score, handleClick, handleNextButton]
