@@ -33853,142 +33853,7 @@ if ("development" !== "production") {
     style: _propTypes.default.object
   });
 }
-},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"Test.js":[function(require,module,exports) {
-// import React from 'react'
-// import { Link } from 'react-router-dom';
-// export default function ButtonNext ({ 
-//   getCountries,
-//   isAnswerCorrect,
-//   setCounter,
-//   setIsQuestionAnswered 
-// }) {
-//   function handleClick () {
-//     getCountries()
-//     setCounter(prev => prev + 1)
-//     setIsQuestionAnswered(false)
-//   }
-//   return (
-//     <>
-//     {isAnswerCorrect ? 
-//       <button 
-//         onClick={handleClick}
-//         className="next"
-//       >
-//         Next
-//       </button> :
-//       <Link to="/tryAgain">
-//         <button 
-//           className="next"
-//         >
-//           Next
-//         </button>
-//       </Link>
-//     }
-//     </>
-//   )
-// }
-// import React, { useState } from 'react'
-// import ButtonNext from "./ButtonNext"
-// export default function Answers ({ 
-//   sortedRandomNumber,
-//   countriesName,
-//   randomNumber1,
-//   getCountries,
-//   counter,
-//   setCounter 
-// }) {
-//   const [ isAnswerCorrect, setIsAnswerCorrect ] = useState(false)
-//   const [ isQuestionAnswered, setIsQuestionAnswered ] = useState(false)
-//   function handleAnswerIsTrue (e) {
-//     if ((countriesName[randomNumber1].name) === (e.target.dataset.value)) {
-//       setIsAnswerCorrect(true)
-//       e.target.classList.add("correct")
-//     }
-//   }
-//   function handleAnswerIsNotTrue (e, buttons) {
-//     //Find the index of the true answer
-//     const indexOfTheRightAnswer = sortedRandomNumber.find(index => {
-//         return countriesName[index].name === countriesName[randomNumber1].name
-//       })
-//       const rightAnswer = countriesName[indexOfTheRightAnswer].name
-//       setIsAnswerCorrect(false)
-//       e.target.classList.add("incorrect")
-//       // find which button contains the right answer
-//       const buttonwithTheCorrectAnswer = buttons.find(button => button.dataset.value == rightAnswer)
-//       buttonwithTheCorrectAnswer.classList.add("correct")
-//   }
-//   function handleAnswers (e) {
-//     //set isQuestionAnswered to true when answered (click one of the answers)
-//     setIsQuestionAnswered(true)
-//     const container = e.target.parentElement
-//     const buttons = Array.from(container.querySelectorAll(".btn"))
-//     //disable the buttons after clicking once so that the user can no have multi answers
-//     buttons.map(button => button.setAttribute("disabled", ""))
-//     if ((countriesName[randomNumber1].name) === (e.target.dataset.value)) {
-//       handleAnswerIsTrue(e)
-//     } else {
-//       handleAnswerIsNotTrue(e, buttons)
-//     }
-//   }
-//   const letters = ["a", "b", "c", "d"]
-//   return (
-//     <>
-//       {sortedRandomNumber.map(indexArr => (
-//           <button 
-//             key={countriesName[indexArr].flag}
-//             className="btn answers"
-//             data-value={countriesName[indexArr].name}
-//             onClick={handleAnswers}
-//           >
-//             {countriesName[indexArr].name}
-//           </button>
-//       ))}
-//       {isQuestionAnswered && 
-//         <ButtonNext 
-//           getCountries={getCountries}
-//           isAnswerCorrect={isAnswerCorrect}
-//           setIsQuestionAnswered={setIsQuestionAnswered}
-//           counter={counter}
-//           setCounter={setCounter}
-//       />}
-//     </>
-//   )
-// }
-},{}],"components/NextButton.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _useFetchQuiz = _interopRequireDefault(require("./useFetchQuiz"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function NextButton({
-  correctAnswer
-}) {
-  const [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton] = (0, _useFetchQuiz.default)();
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCorrect ? /*#__PURE__*/_react.default.createElement("button", {
-    value: correctAnswer,
-    className: "next-button",
-    onClick: handleNextButton
-  }, "Next") : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    className: "next-button--anchor",
-    to: "/tryagain"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "next-button"
-  }, "Next")));
-}
-
-var _default = NextButton;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./useFetchQuiz":"components/useFetchQuiz.js"}],"components/Quiz-question.js":[function(require,module,exports) {
+},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"components/pages/Quiz-question.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34004,43 +33869,7 @@ const questions = [{
 }];
 var _default = questions;
 exports.default = _default;
-},{}],"components/TryAgain.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _useFetchQuiz = _interopRequireDefault(require("./useFetchQuiz"));
-
-var _reactRouterDom = require("react-router-dom");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function TryAgain({
-  scores,
-  onClick
-}) {
-  const [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton] = (0, _useFetchQuiz.default)();
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "container result"
-  }, /*#__PURE__*/_react.default.createElement("h2", {
-    className: "result--heading"
-  }, "Result"), /*#__PURE__*/_react.default.createElement("p", {
-    className: "result--text"
-  }, "You got ", /*#__PURE__*/_react.default.createElement("span", null, score), " correct answers"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/backtohome"
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "result--button"
-  }, "Try again")));
-}
-
-var _default = TryAgain;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","./useFetchQuiz":"components/useFetchQuiz.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"components/useFetchQuiz.js":[function(require,module,exports) {
+},{}],"components/customHooks/useFetchQuiz.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34050,13 +33879,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Test = _interopRequireDefault(require("../Test"));
-
-var _NextButton = _interopRequireDefault(require("./NextButton"));
-
-var _QuizQuestion = _interopRequireDefault(require("./Quiz-question"));
-
-var _TryAgain = _interopRequireDefault(require("./TryAgain"));
+var _QuizQuestion = _interopRequireDefault(require("../pages/Quiz-question"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34067,11 +33890,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 const API_url = 'https://restcountries.eu/rest/v2/all';
 
 function useFetchQuiz() {
-  const [quizes, setQuiz] = (0, _react.useState)([]);
+  const [quizData, setQuizData] = (0, _react.useState)([]);
   const [score, setScore] = (0, _react.useState)(0);
-  const [button, setbutton] = (0, _react.useState)(false);
-  const [isCorrect, setIsCorrect] = (0, _react.useState)(false);
-  const [nextPage, setNextPage] = (0, _react.useState)(false);
+  const [nextbutton, setNextbutton] = (0, _react.useState)(false);
+  const [isNextPageShown, setNextPage] = (0, _react.useState)(false);
   const [classList, setClass] = (0, _react.useState)('');
 
   async function fetchData(id) {
@@ -34081,90 +33903,78 @@ function useFetchQuiz() {
     const randomQuestion = _QuizQuestion.default[Math.floor(Math.random() * _QuizQuestion.default.length)]; // Randomizing answers
 
 
-    const randomizingAnswers = result[Math.floor(Math.random() * result.length)]; // Randomizing option of answers
+    const randomAnswer = result[Math.floor(Math.random() * result.length)]; // Randomizing option of answers
 
     const opt1 = result[Math.floor(Math.random() * result.length)];
     const opt2 = result[Math.floor(Math.random() * result.length)];
     const opt3 = result[Math.floor(Math.random() * result.length)]; // Answers
 
-    const options = [randomizingAnswers.name, opt1.name, opt2.name, opt3.name];
-    const sortedOptions = options.sort(() => {
+    const answerOptions = [randomAnswer.name, opt1.name, opt2.name, opt3.name];
+    const sortedanswerOptions = answerOptions.sort(() => {
       return 0.5 - Math.random();
     });
-    const quizObj = {
+    const quizDataObject = {
       question: randomQuestion,
-      countries: randomizingAnswers,
-      flag: randomizingAnswers.flag,
-      capital: randomizingAnswers.capital,
-      answers: sortedOptions,
-      correctAnswer: randomizingAnswers.name,
-      userAnswer: ''
+      countries: randomAnswer,
+      flag: randomAnswer.flag,
+      capital: randomAnswer.capital,
+      answers: sortedanswerOptions,
+      correctAnswer: randomAnswer.name,
+      userAnswer: '',
+      isCorrect: false,
+      newScore: 0
     }; // Set state
 
-    setQuiz([quizObj]);
+    setQuizData([quizDataObject]);
   } // useEffect
 
 
   (0, _react.useEffect)(() => {
     fetchData();
   }, []);
-
-  function handleTrueValue(e) {
-    const userGuess = e.target;
-    setbutton(true);
-    const findAnswer = quizes.find(quiz => quiz.correctAnswer);
-
-    if (userGuess.value == findAnswer.correctAnswer) {
-      userGuess.classList.add('true');
-      console.log(findAnswer.correctAnswer);
-      setIsCorrect(true);
-      userGuess.classList.add('untrue');
-    }
-  }
-
-  function handleFalseValue(e) {
-    const userGuess = e.target;
-    setbutton(true);
-    const findAnswer = quizes.find(quiz => quiz.correctAnswer);
-
-    if (userGuess !== findAnswer.correctAnswer) {
-      userGuess.classList.add('untrue');
-      findAnswer.correctAnswer;
-    }
-  }
+  const buttons = Array.from(document.querySelectorAll(".btn"));
 
   function handleClick(e) {
-    handleTrueValue(e);
-    handleFalseValue(e);
+    const userGuess = e.target;
+    setNextbutton(true);
+    const foundndAnswer = quizData.find(quiz => quiz.correctAnswer);
+
+    if (userGuess.value == foundndAnswer.correctAnswer) {
+      userGuess.classList.add('true');
+      foundndAnswer.isCorrect = true;
+      userGuess.classList.add('untrue');
+      setScore(score + 1); // buttons.map(button => button.classList.add('disabledButton'))
+    }
+
+    if (userGuess !== foundndAnswer.correctAnswer) {
+      userGuess.classList.add('untrue');
+      foundndAnswer.correctAnswer;
+    } // const findButton = buttons.find(button => button.value)            
+    // if (foundndAnswer.correctAnswer === findButton) {
+    //     findButton.classList.add('true')
+    //     buttons.map(button => button.classList.add('disabledButton'))
+    // }
+
   }
 
   function handleNextButton(e) {
-    const userGuess = e.target; // console.log(userGuess.value);
-    // const findAnswer = quizes.find(quiz => quiz.correctAnswer);
-    // console.log(findAnswer.correctAnswer);
-    // setScore(prev => prev + 1)
-    // setIsCorrect(true)
-    // fetchData()
-
-    const buttons = Array.from(document.querySelectorAll(".btn"));
-    const findButtomValue = buttons.find(button => button.classList);
-    const foundValue = findButtomValue.value;
-    const trueValue = handleTrueValue(e);
-
-    if (foundValue) {
-      console.log(foundValue);
-      console.log(userGuess.value);
-      fetchData();
-    }
+    const userGuess = e.target;
+    const foundndAnswer = quizData.find(quiz => quiz.correctAnswer);
+    fetchData();
   }
 
-  console.log(quizes);
-  return [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton];
+  function handleNextToTryAgain() {
+    console.log(score);
+    return score;
+  }
+
+  console.log(quizData);
+  return [classList, quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton, handleNextToTryAgain];
 }
 
 var _default = useFetchQuiz;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../Test":"Test.js","./NextButton":"components/NextButton.js","./Quiz-question":"components/Quiz-question.js","./TryAgain":"components/TryAgain.js"}],"components/DisplayQuiz.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../pages/Quiz-question":"components/pages/Quiz-question.js"}],"components/pages/DisplayQuiz.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34223,7 +34033,7 @@ var _default = DisplayQuiz; // style={background}
 // style={background}
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"components/First-page.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"components/pages/NextButton.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34233,7 +34043,46 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _useFetchQuiz = _interopRequireDefault(require("./useFetchQuiz"));
+var _reactRouterDom = require("react-router-dom");
+
+var _useFetchQuiz = _interopRequireDefault(require("../customHooks/useFetchQuiz"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function NextButton({
+  isCorrect,
+  correctAnswer,
+  nextButtonOnClick,
+  clickNextBtn
+}) {
+  // const [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton] = useFetchQuiz()
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCorrect ? /*#__PURE__*/_react.default.createElement("button", {
+    value: correctAnswer,
+    className: "next-button",
+    onClick: nextButtonOnClick
+  }, "Next") : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    className: "next-button--anchor",
+    value: correctAnswer,
+    onClick: clickNextBtn,
+    to: "/tryagain"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "next-button"
+  }, "Next")));
+}
+
+var _default = NextButton;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../customHooks/useFetchQuiz":"components/customHooks/useFetchQuiz.js"}],"components/pages/HomePage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _useFetchQuiz = _interopRequireDefault(require("../customHooks/useFetchQuiz"));
 
 var _DisplayQuiz = _interopRequireDefault(require("./DisplayQuiz"));
 
@@ -34243,23 +34092,60 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function FirstPage() {
-  const [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton] = (0, _useFetchQuiz.default)();
+function HomePage() {
+  const [classList, quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton, handleNextToTryAgain] = (0, _useFetchQuiz.default)();
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "container"
-  }, quizes.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, _extends({
+  }, quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, _extends({
     onClick: handleClick,
     key: quiz.capital
   }, quiz, {
     classList: classList
-  }))), button && quizes.map(quiz => /*#__PURE__*/_react.default.createElement(_NextButton.default, _extends({
+  }))), nextbutton && quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_NextButton.default, _extends({
     key: quiz.capital
-  }, quiz))));
+  }, quiz, {
+    nextButtonOnClick: handleNextButton,
+    clickNextBtn: handleNextToTryAgain
+  }))));
 }
 
-var _default = FirstPage;
+var _default = HomePage;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./useFetchQuiz":"components/useFetchQuiz.js","./DisplayQuiz":"components/DisplayQuiz.js","./NextButton":"components/NextButton.js"}],"components/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../customHooks/useFetchQuiz":"components/customHooks/useFetchQuiz.js","./DisplayQuiz":"components/pages/DisplayQuiz.js","./NextButton":"components/pages/NextButton.js"}],"components/pages/TryAgain.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _useFetchQuiz = _interopRequireDefault(require("../customHooks/useFetchQuiz"));
+
+var _reactRouterDom = require("react-router-dom");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function TryAgain() {
+  const [classList, quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton, handleNextToTryAgain] = (0, _useFetchQuiz.default)();
+  console.log(score);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "container result"
+  }, /*#__PURE__*/_react.default.createElement("h2", {
+    className: "result--heading"
+  }, "Result"), /*#__PURE__*/_react.default.createElement("p", {
+    className: "result--text"
+  }, "You got ", /*#__PURE__*/_react.default.createElement("span", null, handleNextToTryAgain(prev => prev + 1)), " correct answers"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "/backtohome"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "result--button"
+  }, "Try again")));
+}
+
+var _default = TryAgain;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../customHooks/useFetchQuiz":"components/customHooks/useFetchQuiz.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34271,13 +34157,13 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
-var _FirstPage = _interopRequireDefault(require("./First-page"));
+var _HomePage = _interopRequireDefault(require("./pages/HomePage"));
 
-var _NextButton = _interopRequireDefault(require("./NextButton"));
+var _NextButton = _interopRequireDefault(require("./pages/NextButton"));
 
-var _TryAgain = _interopRequireDefault(require("./TryAgain"));
+var _TryAgain = _interopRequireDefault(require("./pages/TryAgain"));
 
-var _useFetchQuiz = _interopRequireDefault(require("./useFetchQuiz"));
+var _useFetchQuiz = _interopRequireDefault(require("./customHooks/useFetchQuiz"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34286,22 +34172,22 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function App() {
-  const [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton] = (0, _useFetchQuiz.default)();
+  const [isCorrect, classList, quizData, nextbutton, isNextPageShown, score, setSCore, handleClick, handleNextButton, handleNextToTryAgain] = (0, _useFetchQuiz.default)();
   return /*#__PURE__*/_react.default.createElement("article", {
     className: "quiz-container"
   }, /*#__PURE__*/_react.default.createElement("h1", null, "Country Quiz"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
-  }, /*#__PURE__*/_react.default.createElement(_FirstPage.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, /*#__PURE__*/_react.default.createElement(_HomePage.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/tryagain"
-  }, !nextPage && /*#__PURE__*/_react.default.createElement(_TryAgain.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, !isNextPageShown && /*#__PURE__*/_react.default.createElement(_TryAgain.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/backtohome"
-  }, /*#__PURE__*/_react.default.createElement(_FirstPage.default, null)))));
+  }, /*#__PURE__*/_react.default.createElement(_HomePage.default, null)))));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./First-page":"components/First-page.js","./NextButton":"components/NextButton.js","./TryAgain":"components/TryAgain.js","./useFetchQuiz":"components/useFetchQuiz.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./pages/HomePage":"components/pages/HomePage.js","./pages/NextButton":"components/pages/NextButton.js","./pages/TryAgain":"components/pages/TryAgain.js","./customHooks/useFetchQuiz":"components/customHooks/useFetchQuiz.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -34342,7 +34228,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51227" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54881" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

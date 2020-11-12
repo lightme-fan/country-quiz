@@ -36,9 +36,9 @@ button {
     height: 56px;
 }
 
-.buttons > button:hover {
+/* .buttons > button:hover {
     background-color: #F9A826;
-}
+} */
 
 .untrue {
     background-color: #EA8282;
@@ -86,4 +86,10 @@ button {
     color: #60BF88;
     font-size: 2rem;
     font-weight: 700;
+}
+
+.disabledButton {
+    /* outline: none; */
+    pointer-events: none;
+    cursor: default;
 }
