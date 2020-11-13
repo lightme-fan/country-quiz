@@ -29,26 +29,25 @@ function useFunctionalities() {
         if (userGuess !== foundndAnswer.correctAnswer) {
             // Add class name to the incorrect answer
             userGuess.classList.add('untrue')
-
+            
             // Show the correct answer if what has been clicked is not the correct answer
             setTimeout(() => {
                 const findTrueBtn = buttons.find(button => button.value === foundndAnswer.correctAnswer)
                 findTrueBtn.classList.add('true')
             }, 700);
-
+            
             // To disable all buttons once one of them is clicked
             buttons.map(button => button.classList.add('disabledButton'))
-        }
-        
-        
+        }       
     }
     
     // Handle next button
     function handleNextButton (e) {
-        const userGuess = e.target
-        const foundndAnswer = quizData.find(quiz => quiz.correctAnswer);
         fetchData()
     }
+    
+    console.log(score);
+    console.log(quizData);
     
     return [quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton]
 }

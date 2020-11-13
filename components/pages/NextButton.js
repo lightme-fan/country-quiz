@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, Router } from 'react-router-dom'
-import useFetchQuiz from '../customHooks/useFunctionalities'
+import useFunctionalities from '../customHooks/useFunctionalities'
 
 function NextButton({isCorrect, correctAnswer, nextButtonOnClick, clickNextBtn }) {
     
@@ -11,8 +11,8 @@ function NextButton({isCorrect, correctAnswer, nextButtonOnClick, clickNextBtn }
                     Next
                 </button>
                 :
-                <Link className='next-button--anchor' value={correctAnswer} onClick={clickNextBtn} to='/tryagain'>
-                    <button className='next-button'>
+                <Link className='next-button--anchor' value={correctAnswer}  to='/tryagain'>
+                    <button className='next-button' onClick={clickNextBtn}>
                         Next
                     </button>
                 </Link>}

@@ -33,7 +33,6 @@ function FetchingData() {
             correctAnswer: randomAnswer.name,
             userAnswer: '',
             isCorrect: false,
-            newScore: 0
         }
 
         // Set state

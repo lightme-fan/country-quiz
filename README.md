@@ -34,7 +34,7 @@ Template for your readme :
 
 <!-- Please update value in the {}  -->
 
-<h1 align="center">{Your project name}</h1>
+<h1 align="center">Country quiz</h1>
 
 <div align="center">
   <h3>

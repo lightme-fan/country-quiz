@@ -33917,8 +33917,7 @@ function FetchingData() {
       answers: sortedanswerOptions,
       correctAnswer: randomAnswer.name,
       userAnswer: '',
-      isCorrect: false,
-      newScore: 0
+      isCorrect: false
     }; // Set state
 
     setQuizData([quizDataObject]);
@@ -33988,11 +33987,11 @@ function useFunctionalities() {
 
 
   function handleNextButton(e) {
-    const userGuess = e.target;
-    const foundndAnswer = quizData.find(quiz => quiz.correctAnswer);
     fetchData();
   }
 
+  console.log(score);
+  console.log(quizData);
   return [quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton];
 }
 
@@ -34020,7 +34019,8 @@ function DisplayQuiz({
   classList,
   capital,
   answers,
-  onClick
+  onClick,
+  icon
 }) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, question.question1 ? /*#__PURE__*/_react.default.createElement("h3", {
     className: "question"
@@ -34036,26 +34036,22 @@ function DisplayQuiz({
     className: "btn",
     value: answers[0],
     onClick: onClick
-  }, answers[0]), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, "A"), /*#__PURE__*/_react.default.createElement("span", null, answers[0]), /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     value: answers[1],
     onClick: onClick
-  }, answers[1]), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, "B"), /*#__PURE__*/_react.default.createElement("span", null, answers[1]), /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     value: answers[2],
     onClick: onClick
-  }, answers[2]), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, "C"), /*#__PURE__*/_react.default.createElement("span", null, answers[2]), /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     value: answers[3],
     onClick: onClick
-  }, answers[3])));
+  }, /*#__PURE__*/_react.default.createElement("span", null, "D"), /*#__PURE__*/_react.default.createElement("span", null, answers[3]), /*#__PURE__*/_react.default.createElement("span", null, icon))));
 }
 
-var _default = DisplayQuiz; // style={background}
-// style={background}
-// style={background}
-// style={background}
-
+var _default = DisplayQuiz;
 exports.default = _default;
 },{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"components/pages/NextButton.js":[function(require,module,exports) {
 "use strict";
@@ -34086,10 +34082,10 @@ function NextButton({
   }, "Next") : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     className: "next-button--anchor",
     value: correctAnswer,
-    onClick: clickNextBtn,
     to: "/tryagain"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "next-button"
+    className: "next-button",
+    onClick: clickNextBtn
   }, "Next")));
 }
 
@@ -34131,7 +34127,9 @@ function HomePage() {
 
 var _default = HomePage;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","./DisplayQuiz":"components/pages/DisplayQuiz.js","./NextButton":"components/pages/NextButton.js"}],"components/pages/TryAgain.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","./DisplayQuiz":"components/pages/DisplayQuiz.js","./NextButton":"components/pages/NextButton.js"}],"wini.svg":[function(require,module,exports) {
+module.exports = "/wini.56f298e9.svg";
+},{}],"components/pages/TryAgain.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34145,14 +34143,20 @@ var _useFunctionalities = _interopRequireDefault(require("../customHooks/useFunc
 
 var _reactRouterDom = require("react-router-dom");
 
+var _wini = _interopRequireDefault(require("../../wini.svg"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function TryAgain() {
+  // Grab custom hooks
   const [quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton] = (0, _useFunctionalities.default)();
   console.log(score);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "container result"
-  }, /*#__PURE__*/_react.default.createElement("h2", {
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: _wini.default,
+    alt: "quiz"
+  }), /*#__PURE__*/_react.default.createElement("h2", {
     className: "result--heading"
   }, "Result"), /*#__PURE__*/_react.default.createElement("p", {
     className: "result--text"
@@ -34165,7 +34169,9 @@ function TryAgain() {
 
 var _default = TryAgain;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"components/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../../wini.svg":"wini.svg"}],"undraw_adventure_4hum 1.svg":[function(require,module,exports) {
+module.exports = "/undraw_adventure_4hum 1.50449585.svg";
+},{}],"components/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34183,6 +34189,8 @@ var _TryAgain = _interopRequireDefault(require("./pages/TryAgain"));
 
 var _useFunctionalities = _interopRequireDefault(require("./customHooks/useFunctionalities"));
 
+var _undraw_adventure_4hum = _interopRequireDefault(require("../undraw_adventure_4hum 1.svg"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -34193,19 +34201,25 @@ function App() {
   const [isCorrect, quizData, nextbutton, isNextPageShown, score, setSCore, handleClick, handleNextButton] = (0, _useFunctionalities.default)();
   return /*#__PURE__*/_react.default.createElement("article", {
     className: "quiz-container"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, "Country Quiz"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, "Country Quiz"), /*#__PURE__*/_react.default.createElement("img", {
+    className: "quiz-img",
+    src: _undraw_adventure_4hum.default,
+    alt: "quizimg"
+  }), /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_HomePage.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/tryagain"
-  }, !isNextPageShown && /*#__PURE__*/_react.default.createElement(_TryAgain.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, !isNextPageShown && /*#__PURE__*/_react.default.createElement(_TryAgain.default, {
+    clickNextBtn: () => handleClick(score)
+  })), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/backtohome"
   }, /*#__PURE__*/_react.default.createElement(_HomePage.default, null)))));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./pages/HomePage":"components/pages/HomePage.js","./pages/TryAgain":"components/pages/TryAgain.js","./customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./pages/HomePage":"components/pages/HomePage.js","./pages/TryAgain":"components/pages/TryAgain.js","./customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","../undraw_adventure_4hum 1.svg":"undraw_adventure_4hum 1.svg"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -34246,7 +34260,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62643" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53005" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
