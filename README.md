@@ -1,48 +1,13 @@
-# Country Quiz
-
-Challenge: Create a country quiz app using an API, and use React to handle the frontend. Don’t look at the existing solution. Fulfill user stories below:
-
-![image](./assets/quiz1.png)
-![image](./assets/quiz2.png)
-![image](./assets/quiz3.png)
-![image](./assets/quiz4.png)
-
--   User story: I can see at least 2 types of question: a city is the capital of.. or a flag belong to country..
--   User story: I can see select an answer
--   User story: I can see if my answer is correct or incorrect
--   User story: When I answer correctly, I can move on to the next question
--   User story: When I answer incorrectly, I can see my results and try again
--   User story: I can try again
-
-**Icon**: https://google.github.io/material-design-icons/
-
-**API**: https://restcountries.eu/. Use data from the API to create questions and answers.
-
-**Design** : https://www.figma.com/file/Gw0ZNBbYN8asqFlZWy3jG1
-
-**Live app** : https://country-quiz-app.netlify.app/
-
-As long as you fulfill all the user stories, you can give your personal touches by adding transition, using your own images, changing colors, or even creating your own layout,...
-
-Once you completed, submit your solutions by providing URLs for both GitHub repository and live app on Netlify and explain briefly what you have done.
-
-For the custom domain url you'll enter in netlify, please use the following naming convention : **country-quiz-_YOUR_FIRSTNAME_.netlify.app** (replace YOUR_FIRSTNAME by your firstname)
-
-Good luck everybody!
-
-Template for your readme :
-
-<!-- Please update value in the {}  -->
 
 <h1 align="center">Country quiz</h1>
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://lightme-fan-country-quiz.netlify.app/">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://github.com/lightme-fan/country-quiz">
       Solution
     </a>
   </h3>
@@ -63,24 +28,27 @@ Template for your readme :
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](./screenShot.png)
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
+You can see my demo by clicking this [link](https://lightme-fan-country-quiz.netlify.app/)
 
--   Where can I see your demo?
--   What was your experience?
--   What have you learned/improved?
--   Your wisdom? :)
+
+I had a lot struggles in this project.
+  - I used custom hooks to fetch the data and all functionalities. But then I could hardly call the custom hooks in different components, especially with the Link and showing the score in the TryAgain page.
+
+I learn new things from this project. 
 
 ### Built With
-
-<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
 
 -   [React](https://reactjs.org/)
 
 ## Features
 
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
+- I have a component folder. In this folder, I have two folders which are Custom-hooks and Pages as well as App.js file
+- In Custom hooks folder, there are two files, useFunctionalities.js and useFetch.
+- The Pages folder contains 5 files: DisplayQuiz.js, HomePage.js, NextButton.js, Quiz-question.js and TryAgain.js.
+- I also have few svg files.
+- Lastly, I have index.css
 
 ## How To Use
 
@@ -90,7 +58,7 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
+$ git clone https://github.com/lightme-fan/country-quiz
 
 # Install dependencies
 $ npm install
@@ -105,6 +73,5 @@ $ npm start
 
 ## Contact
 
--   Website [your-website.com](https://{your-web-site-link})
--   GitHub [@your-username](https://{github.com/your-usermame})
--   Twitter [@your-twitter](https://{twitter.com/your-username})
+-   Website [Country quiz](https://lightme-fan-country-quiz.netlify.app/)
+-   GitHub [lightme-fan](https://{github.com/lightme-fan})
