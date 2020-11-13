@@ -3,7 +3,18 @@ import { Link, Router } from 'react-router-dom'
 import useFunctionalities from '../customHooks/useFunctionalities'
 
 function NextButton({isCorrect, correctAnswer, nextButtonOnClick, clickNextBtn }) {
-    
+    const [ 
+        quizData, 
+        nextbutton, 
+        isNextPageShown, 
+        quizScore, 
+        setScore, 
+        isScoreShown,
+        handleClick, 
+        handleNextButton,
+        handleTryAgain
+    ] = useFunctionalities()
+
     return (
         <>  
             {isCorrect ?
@@ -11,8 +22,8 @@ function NextButton({isCorrect, correctAnswer, nextButtonOnClick, clickNextBtn }
                     Next
                 </button>
                 :
-                <Link className='next-button--anchor' value={correctAnswer}  to='/tryagain'>
-                    <button className='next-button' onClick={clickNextBtn}>
+                <Link className='next-button--anchor'  to='/tryagain'>
+                    <button className='next-button' value={correctAnswer} onClick={handleTryAgain}>
                         Next
                     </button>
                 </Link>}

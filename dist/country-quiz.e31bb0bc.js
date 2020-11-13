@@ -33952,9 +33952,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function useFunctionalities() {
   const [quizData, fetchData] = (0, _useFetchData.default)();
-  const [score, setScore] = (0, _react.useState)(0);
+  const [quizScore, setScore] = (0, _react.useState)(0);
   const [nextbutton, setNextbutton] = (0, _react.useState)(false);
   const [isNextPageShown, setNextPage] = (0, _react.useState)(false);
+  const [isScoreShown, setShowScore] = (0, _react.useState)(false);
 
   function handleClick(e) {
     const userGuess = e.target;
@@ -33962,24 +33963,24 @@ function useFunctionalities() {
 
     const buttons = Array.from(document.querySelectorAll(".btn")); // Find the right answer in order to compare with the value of each button
 
-    const foundndAnswer = quizData.find(quiz => quiz.correctAnswer); // Comparison if what is clicked and the correct answer are the same
+    const foundedAnswer = quizData.find(quiz => quiz.correctAnswer); // Comparison if what is clicked and the correct answer are the same
 
-    if (userGuess.value == foundndAnswer.correctAnswer) {
+    if (userGuess.value == foundedAnswer.correctAnswer) {
       // Add class name to the correct answer 
       userGuess.classList.add('true');
-      foundndAnswer.isCorrect = true;
-      setScore(score + 1);
+      foundedAnswer.isCorrect = true;
     } // Comparison if what is clicked and the correct answer are not the same
 
 
-    if (userGuess !== foundndAnswer.correctAnswer) {
+    if (userGuess !== foundedAnswer.correctAnswer) {
       // Add class name to the incorrect answer
       userGuess.classList.add('untrue'); // Show the correct answer if what has been clicked is not the correct answer
 
       setTimeout(() => {
-        const findTrueBtn = buttons.find(button => button.value === foundndAnswer.correctAnswer);
+        const findTrueBtn = buttons.find(button => button.value === foundedAnswer.correctAnswer);
         findTrueBtn.classList.add('true');
-      }, 700); // To disable all buttons once one of them is clicked
+      }, 700);
+      setShowScore(true); // To disable all buttons once one of them is clicked
 
       buttons.map(button => button.classList.add('disabledButton'));
     }
@@ -33988,11 +33989,20 @@ function useFunctionalities() {
 
   function handleNextButton(e) {
     fetchData();
+  } // Handle next button
+
+
+  function handleTryAgain(e) {
+    const nextBtn = e.target.value;
+    const foundedAnswer = quizData.find(quiz => quiz.correctAnswer);
+    console.log(foundedAnswer);
+    const buttons = Array.from(document.querySelectorAll(".btn"));
+    const findTrueBtn = buttons.find(button => button.value === foundedAnswer.correctAnswer);
   }
 
-  console.log(score);
+  console.log(quizScore);
   console.log(quizData);
-  return [quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton];
+  return [quizData, nextbutton, isNextPageShown, quizScore, setScore, isScoreShown, handleClick, handleNextButton, handleTryAgain];
 }
 
 var _default = useFunctionalities;
@@ -34075,59 +34085,24 @@ function NextButton({
   nextButtonOnClick,
   clickNextBtn
 }) {
+  const [quizData, nextbutton, isNextPageShown, quizScore, setScore, isScoreShown, handleClick, handleNextButton, handleTryAgain] = (0, _useFunctionalities.default)();
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCorrect ? /*#__PURE__*/_react.default.createElement("button", {
     value: correctAnswer,
     className: "next-button",
     onClick: nextButtonOnClick
   }, "Next") : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     className: "next-button--anchor",
-    value: correctAnswer,
     to: "/tryagain"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "next-button",
-    onClick: clickNextBtn
+    value: correctAnswer,
+    onClick: handleTryAgain
   }, "Next")));
 }
 
 var _default = NextButton;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js"}],"components/pages/HomePage.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _useFunctionalities = _interopRequireDefault(require("../customHooks/useFunctionalities"));
-
-var _DisplayQuiz = _interopRequireDefault(require("./DisplayQuiz"));
-
-var _NextButton = _interopRequireDefault(require("./NextButton"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function HomePage() {
-  const [quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton] = (0, _useFunctionalities.default)();
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "container"
-  }, quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, _extends({
-    onClick: handleClick,
-    key: quiz.capital
-  }, quiz))), nextbutton && quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_NextButton.default, _extends({
-    key: quiz.capital
-  }, quiz, {
-    nextButtonOnClick: handleNextButton
-  }))));
-}
-
-var _default = HomePage;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","./DisplayQuiz":"components/pages/DisplayQuiz.js","./NextButton":"components/pages/NextButton.js"}],"wini.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js"}],"wini.svg":[function(require,module,exports) {
 module.exports = "/wini.56f298e9.svg";
 },{}],"components/pages/TryAgain.js":[function(require,module,exports) {
 "use strict";
@@ -34147,11 +34122,13 @@ var _wini = _interopRequireDefault(require("../../wini.svg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function TryAgain() {
+function TryAgain({
+  score,
+  onClick
+}) {
   // Grab custom hooks
-  const [quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton] = (0, _useFunctionalities.default)();
-  console.log(score);
-  return /*#__PURE__*/_react.default.createElement("div", {
+  const [quizData, nextbutton, isNextPageShown, quizScore, setScore, isScoreShown, handleClick, handleNextButton, handleTryAgain] = (0, _useFunctionalities.default)();
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isScoreShown && /*#__PURE__*/_react.default.createElement("div", {
     className: "container result"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: _wini.default,
@@ -34160,16 +34137,54 @@ function TryAgain() {
     className: "result--heading"
   }, "Result"), /*#__PURE__*/_react.default.createElement("p", {
     className: "result--text"
-  }, "You got ", /*#__PURE__*/_react.default.createElement("span", null, score), " correct answers"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, "You got ", /*#__PURE__*/_react.default.createElement("span", null, quizScore), " correct answers"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/backtohome"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "result--button"
-  }, "Try again")));
+  }, "Try again"))));
 }
 
 var _default = TryAgain;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../../wini.svg":"wini.svg"}],"undraw_adventure_4hum 1.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../../wini.svg":"wini.svg"}],"components/pages/HomePage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _useFunctionalities = _interopRequireDefault(require("../customHooks/useFunctionalities"));
+
+var _DisplayQuiz = _interopRequireDefault(require("./DisplayQuiz"));
+
+var _NextButton = _interopRequireDefault(require("./NextButton"));
+
+var _TryAgain = _interopRequireDefault(require("./TryAgain"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function HomePage() {
+  const [quizData, nextbutton, isNextPageShown, quizScore, setScore, isScoreShown, handleClick, handleNextButton, handleTryAgain] = (0, _useFunctionalities.default)();
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "container"
+  }, quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, _extends({
+    onClick: handleClick,
+    key: quiz.capital
+  }, quiz))), nextbutton && quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_NextButton.default, _extends({
+    key: quiz.capital
+  }, quiz, {
+    nextButtonOnClick: handleNextButton
+  }))));
+}
+
+var _default = HomePage;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","./DisplayQuiz":"components/pages/DisplayQuiz.js","./NextButton":"components/pages/NextButton.js","./TryAgain":"components/pages/TryAgain.js"}],"undraw_adventure_4hum 1.svg":[function(require,module,exports) {
 module.exports = "/undraw_adventure_4hum 1.50449585.svg";
 },{}],"components/App.js":[function(require,module,exports) {
 "use strict";
@@ -34198,7 +34213,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function App() {
-  const [isCorrect, quizData, nextbutton, isNextPageShown, score, setSCore, handleClick, handleNextButton] = (0, _useFunctionalities.default)();
+  const [isCorrect, quizData, nextbutton, isNextPageShown, quizScore, setSCore, isScoreShown, handleClick, handleNextButton, handleTryAgain] = (0, _useFunctionalities.default)();
   return /*#__PURE__*/_react.default.createElement("article", {
     className: "quiz-container"
   }, /*#__PURE__*/_react.default.createElement("h1", null, "Country Quiz"), /*#__PURE__*/_react.default.createElement("img", {
@@ -34210,9 +34225,7 @@ function App() {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_HomePage.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/tryagain"
-  }, !isNextPageShown && /*#__PURE__*/_react.default.createElement(_TryAgain.default, {
-    clickNextBtn: () => handleClick(score)
-  })), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  }, !isNextPageShown && /*#__PURE__*/_react.default.createElement(_TryAgain.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/backtohome"
   }, /*#__PURE__*/_react.default.createElement(_HomePage.default, null)))));
 }
@@ -34260,7 +34273,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53005" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53428" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,6 +1,6 @@
 body {
     background-color: blue;
-    background-image: url('https://country-quiz-app.netlify.app/static/media/background.7e2f750c.png"');
+    /* background-image: url('https://country-quiz-app.netlify.app/static/media/background.7e2f750c.png"'); */
 }
 
 .quiz-container {
@@ -40,6 +40,7 @@ button {
     margin-bottom: 16px;
     color: rgba(96, 102, 208, 0.8);
     border: 2px solid rgba(96, 102, 208, 0.7);
+    cursor: pointer;
 }
 
 .buttons > button {

@@ -11,10 +11,12 @@ function App() {
         quizData, 
         nextbutton, 
         isNextPageShown, 
-        score, 
+        quizScore, 
         setSCore, 
+        isScoreShown,
         handleClick, 
-        handleNextButton
+        handleNextButton,
+        handleTryAgain
     ] = useFunctionalities()
 
     return (        
@@ -27,7 +29,7 @@ function App() {
                         <HomePage/>
                     </Route>
                     <Route path='/tryagain'>
-                        {!isNextPageShown && <TryAgain clickNextBtn={() => handleClick(score)}/>}
+                        {!isNextPageShown && <TryAgain />}
                     </Route>
                     <Route path='/backtohome'>
                         <HomePage/>

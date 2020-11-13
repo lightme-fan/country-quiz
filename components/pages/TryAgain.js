@@ -3,26 +3,31 @@ import useFunctionalities from '../customHooks/useFunctionalities'
 import { Link } from 'react-router-dom'
 import win from '../../wini.svg' 
 
-function TryAgain() {
+function TryAgain({ score, onClick }) {
     // Grab custom hooks
     const [ 
         quizData, 
         nextbutton, 
         isNextPageShown, 
-        score, 
+        quizScore, 
         setScore, 
+        isScoreShown,
         handleClick, 
-        handleNextButton
+        handleNextButton,
+        handleTryAgain
     ] = useFunctionalities() 
-    console.log(score);
-
+    
     return (
-        <div className='container result'>
-            <img src={win} alt='quiz'/>
-            <h2 className='result--heading'>Result</h2>
-            <p className='result--text'>You got <span>{score}</span> correct answers</p>
-            <Link to='/backtohome'><button className='result--button'>Try again</button></Link>
-        </div>
+        <>
+            {!isScoreShown &&
+                <div className='container result'>
+                    <img src={win} alt='quiz'/>
+                    <h2 className='result--heading'>Result</h2>
+                    <p className='result--text'>You got <span>{quizScore}</span> correct answers</p>
+                    <Link to='/backtohome'><button className='result--button'>Try again</button></Link>
+                </div>
+            }
+        </>
     )
 }
 
