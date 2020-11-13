@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import NextButton from './pages/NextButton';
 import TryAgain from './pages/TryAgain';
-import useFetchQuiz from './customHooks/useFetchQuiz'
+import useFunctionalities from './customHooks/useFunctionalities'
 
 function App() {
-    const [isCorrect, classList, quizData, nextbutton, isNextPageShown, score, setSCore, handleClick, handleNextButton, handleNextToTryAgain] = useFetchQuiz() 
+    const [
+        isCorrect, 
+        quizData, 
+        nextbutton, 
+        isNextPageShown, 
+        score, 
+        setSCore, 
+        handleClick, 
+        handleNextButton
+    ] = useFunctionalities()
+
     return (        
         <article className='quiz-container'>
             <h1>Country Quiz</h1>

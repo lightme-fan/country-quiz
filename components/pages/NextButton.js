@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link, Router } from 'react-router-dom'
-import useFetchQuiz from '../customHooks/useFetchQuiz'
+import useFetchQuiz from '../customHooks/useFunctionalities'
 
 function NextButton({isCorrect, correctAnswer, nextButtonOnClick, clickNextBtn }) {
-    // const [isCorrect, classList, quizes, button, nextPage, score, handleClick, handleNextButton] = useFetchQuiz()
+    
     return (
         <>  
             {isCorrect ?

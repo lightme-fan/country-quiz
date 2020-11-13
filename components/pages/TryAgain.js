@@ -1,14 +1,23 @@
 import React from 'react'
-import useFetchQuiz from '../customHooks/useFetchQuiz'
+import useFunctionalities from '../customHooks/useFunctionalities'
 import { Link } from 'react-router-dom'
 
 function TryAgain() {
-    const [classList, quizData, nextbutton, isNextPageShown, score, setScore, handleClick, handleNextButton, handleNextToTryAgain] = useFetchQuiz() 
+    const [ 
+        quizData, 
+        nextbutton, 
+        isNextPageShown, 
+        score, 
+        setScore, 
+        handleClick, 
+        handleNextButton
+    ] = useFunctionalities() 
     console.log(score);
+
     return (
         <div className='container result'>
             <h2 className='result--heading'>Result</h2>
-            <p className='result--text'>You got <span>{handleNextToTryAgain(prev => prev + 1)}</span> correct answers</p>
+            <p className='result--text'>You got <span>{score}</span> correct answers</p>
             <Link to='/backtohome'><button className='result--button'>Try again</button></Link>
         </div>
     )
