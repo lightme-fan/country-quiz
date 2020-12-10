@@ -1,19 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, Router } from 'react-router-dom'
 import useFunctionalities from '../customHooks/useFunctionalities'
 
-function NextButton({isCorrect, correctAnswer, nextButtonOnClick, clickNextBtn }) {
-    const [ 
-        quizData, 
-        nextbutton, 
-        isNextPageShown, 
+import { Context } from '../ContextProvider'
+
+function NextButton({ correctAnswer, nextButtonOnClick, clickNextBtn }) {
+    const {
+        isCorrect,
         quizScore, 
-        setScore, 
-        isScoreShown,
-        handleClick, 
-        handleNextButton,
-        handleTryAgain
-    ] = useFunctionalities()
+        setSCore, 
+     } = useContext(Context)
+    console.log(isCorrect);
 
     return (
         <>  
@@ -23,7 +20,7 @@ function NextButton({isCorrect, correctAnswer, nextButtonOnClick, clickNextBtn }
                 </button>
                 :
                 <Link className='next-button--anchor'  to='/tryagain'>
-                    <button className='next-button' value={correctAnswer} onClick={handleTryAgain}>
+                    <button className='next-button' value={correctAnswer}>
                         Next
                     </button>
                 </Link>}

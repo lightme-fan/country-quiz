@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+
+import { Context } from '../ContextProvider'
 
 function DisplayQuiz({background, flag, question, correctAnswer, classList, capital, answers, onClick, icon}) {
     return (
@@ -10,27 +12,27 @@ function DisplayQuiz({background, flag, question, correctAnswer, classList, capi
             }
             <div className='buttons'>
                 <button className='btn' value={answers[0]} onClick={onClick}>
-                    <span>A</span>
-                    <span>{answers[0]}</span>
-                    <span>{icon}</span>
+                    <div>A</div>
+                    <div>{answers[0]}</div>
+                    <div>{icon}</div>
                 </button><br/>
 
                 <button className='btn' value={answers[1]} onClick={onClick}>
-                    <span>B</span>
-                    <span>{answers[1]}</span>   
-                    <span>{icon}</span>
+                    <div>B</div>
+                    <div>{answers[1]}</div>   
+                    <div>{icon}</div>
                 </button><br/>
 
                 <button className='btn' value={answers[2]} onClick={onClick}>
-                    <span>C</span>
-                    <span>{answers[2]}</span>
-                    <span>{icon}</span>
+                    <div>C</div>
+                    <div>{answers[2]}</div>
+                    <div>{icon}</div>
                 </button><br/>
 
                 <button className='btn' value={answers[3]} onClick={onClick}>
-                    <span>D</span>
-                    <span>{answers[3]}</span>
-                    <span>{icon}</span>
+                    <div>D</div>
+                    <div>{answers[3]}</div>
+                    <div>{icon}</div>
                 </button>
             </div>
         </>

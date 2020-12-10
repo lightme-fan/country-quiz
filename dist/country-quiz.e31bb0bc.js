@@ -29772,7 +29772,178 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/pages/Quiz-question.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+const questions = [{
+  question1: 'is the capital of ',
+  id: 'question'
+}, {
+  question2: 'Wich country does this flag belong to ?',
+  id: 'question'
+}];
+var _default = questions;
+exports.default = _default;
+},{}],"components/customHooks/useFetchData.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _QuizQuestion = _interopRequireDefault(require("../pages/Quiz-question"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const API_url = 'https://restcountries.eu/rest/v2/all';
+
+function FetchingData() {
+  const [quizData, setQuizData] = (0, _react.useState)([]);
+
+  async function fetchData(id) {
+    const response = await fetch(API_url);
+    const result = await response.json(); // Randomizing questions
+
+    const randomQuestion = _QuizQuestion.default[Math.floor(Math.random() * _QuizQuestion.default.length)]; // Randomizing answers
+
+
+    const randomAnswer = result[Math.floor(Math.random() * result.length)]; // Randomizing option of answers
+
+    const opt1 = result[Math.floor(Math.random() * result.length)];
+    const opt2 = result[Math.floor(Math.random() * result.length)];
+    const opt3 = result[Math.floor(Math.random() * result.length)]; // Answers
+
+    const answerOptions = [randomAnswer.name, opt1.name, opt2.name, opt3.name];
+    const sortedanswerOptions = answerOptions.sort(() => {
+      return 0.5 - Math.random();
+    });
+    const quizDataObject = {
+      question: randomQuestion,
+      countries: randomAnswer,
+      flag: randomAnswer.flag,
+      capital: randomAnswer.capital,
+      answers: sortedanswerOptions,
+      correctAnswer: randomAnswer.name,
+      userAnswer: '',
+      isCorrect: false
+    }; // Set state
+
+    setQuizData([quizDataObject]);
+  } // useEffect
+
+
+  (0, _react.useEffect)(() => {
+    fetchData();
+  }, []);
+  return [quizData, fetchData];
+}
+
+var _default = FetchingData;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","../pages/Quiz-question":"components/pages/Quiz-question.js"}],"components/ContextProvider.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ContextProvider = ContextProvider;
+exports.Context = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _useFetchData = _interopRequireDefault(require("./customHooks/useFetchData"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+const Context = (0, _react.createContext)();
+exports.Context = Context;
+
+function ContextProvider({
+  children
+}) {
+  const [quizData, fetchData] = (0, _useFetchData.default)();
+  const [quizScore, setScore] = (0, _react.useState)(0);
+  const [nextbutton, setNextbutton] = (0, _react.useState)(false);
+  const [isNextPageShown, setNextPage] = (0, _react.useState)(false);
+  const [isScoreShown, setShowScore] = (0, _react.useState)(false);
+  const [isCorrect, setIsCorrect] = (0, _react.useState)(false);
+
+  function handleClick(e) {
+    const userGuess = e.target;
+    setNextbutton(true); // Grab the four buttons
+
+    const buttons = Array.from(document.querySelectorAll(".btn")); // Find the right answer in order to compare with the value of each button
+
+    const foundedAnswer = quizData.find(quiz => quiz.correctAnswer); // Comparison if what is clicked and the correct answer are the same
+
+    if (userGuess.value === foundedAnswer.correctAnswer) {
+      // Add class name to the correct answer 
+      setScore(prev => prev + 1);
+      userGuess.classList.add('true');
+      setIsCorrect(true);
+    } // Comparison if what is clicked and the correct answer are not the same
+
+
+    if (userGuess.value !== foundedAnswer.correctAnswer) {
+      // Add class name to the incorrect answer
+      userGuess.classList.add('untrue');
+      setIsCorrect(false); // Show the correct answer if what has been clicked is not the correct answer
+
+      setTimeout(() => {
+        const findTrueBtn = buttons.find(button => button.value === foundedAnswer.correctAnswer);
+        findTrueBtn.classList.add('true');
+      }, 700);
+      setShowScore(true); // To disable all buttons once one of them is clicked
+
+      buttons.map(button => button.classList.add('disabledButton'));
+    }
+  }
+
+  console.log(quizData); // Handle next button
+
+  function handleNextButton(e) {
+    fetchData();
+    console.log(e.target.value);
+  }
+
+  function handleTryAgain(e) {
+    const nextBtn = e.target.value;
+    const foundedAnswer = quizData.find(quiz => quiz.correctAnswer);
+    const buttons = Array.from(document.querySelectorAll(".btn"));
+    const findTrueBtn = buttons.find(button => button.value === foundedAnswer.correctAnswer);
+  }
+
+  return /*#__PURE__*/_react.default.createElement(Context.Provider, {
+    value: {
+      isCorrect,
+      quizData,
+      nextbutton,
+      isNextPageShown,
+      quizScore,
+      setScore,
+      isScoreShown,
+      handleClick,
+      handleNextButton,
+      handleTryAgain
+    }
+  }, children);
+}
+},{"react":"node_modules/react/index.js","./customHooks/useFetchData":"components/customHooks/useFetchData.js"}],"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33853,86 +34024,7 @@ if ("development" !== "production") {
     style: _propTypes.default.object
   });
 }
-},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"components/pages/Quiz-question.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-const questions = [{
-  question1: 'is the capital of ',
-  id: 'question'
-}, {
-  question2: 'Wich country does this flag belong to ?',
-  id: 'question'
-}];
-var _default = questions;
-exports.default = _default;
-},{}],"components/customHooks/useFetchData.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _QuizQuestion = _interopRequireDefault(require("../pages/Quiz-question"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-const API_url = 'https://restcountries.eu/rest/v2/all';
-
-function FetchingData() {
-  const [quizData, setQuizData] = (0, _react.useState)([]);
-
-  async function fetchData(id) {
-    const response = await fetch(API_url);
-    const result = await response.json(); // Randomizing questions
-
-    const randomQuestion = _QuizQuestion.default[Math.floor(Math.random() * _QuizQuestion.default.length)]; // Randomizing answers
-
-
-    const randomAnswer = result[Math.floor(Math.random() * result.length)]; // Randomizing option of answers
-
-    const opt1 = result[Math.floor(Math.random() * result.length)];
-    const opt2 = result[Math.floor(Math.random() * result.length)];
-    const opt3 = result[Math.floor(Math.random() * result.length)]; // Answers
-
-    const answerOptions = [randomAnswer.name, opt1.name, opt2.name, opt3.name];
-    const sortedanswerOptions = answerOptions.sort(() => {
-      return 0.5 - Math.random();
-    });
-    const quizDataObject = {
-      question: randomQuestion,
-      countries: randomAnswer,
-      flag: randomAnswer.flag,
-      capital: randomAnswer.capital,
-      answers: sortedanswerOptions,
-      correctAnswer: randomAnswer.name,
-      userAnswer: '',
-      isCorrect: false
-    }; // Set state
-
-    setQuizData([quizDataObject]);
-  } // useEffect
-
-
-  (0, _react.useEffect)(() => {
-    fetchData();
-  }, []);
-  return [quizData, fetchData];
-}
-
-var _default = FetchingData;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../pages/Quiz-question":"components/pages/Quiz-question.js"}],"components/customHooks/useFunctionalities.js":[function(require,module,exports) {
+},{"react-router":"node_modules/react-router/esm/react-router.js","@babel/runtime/helpers/esm/inheritsLoose":"node_modules/@babel/runtime/helpers/esm/inheritsLoose.js","react":"node_modules/react/index.js","history":"node_modules/history/esm/history.js","prop-types":"node_modules/prop-types/index.js","tiny-warning":"node_modules/tiny-warning/dist/tiny-warning.esm.js","@babel/runtime/helpers/esm/extends":"node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","tiny-invariant":"node_modules/tiny-invariant/dist/tiny-invariant.esm.js"}],"components/customHooks/useFunctionalities.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33956,6 +34048,7 @@ function useFunctionalities() {
   const [nextbutton, setNextbutton] = (0, _react.useState)(false);
   const [isNextPageShown, setNextPage] = (0, _react.useState)(false);
   const [isScoreShown, setShowScore] = (0, _react.useState)(false);
+  console.log(quizData);
 
   function handleClick(e) {
     const userGuess = e.target;
@@ -33965,7 +34058,7 @@ function useFunctionalities() {
 
     const foundedAnswer = quizData.find(quiz => quiz.correctAnswer); // Comparison if what is clicked and the correct answer are the same
 
-    if (userGuess.value == foundedAnswer.correctAnswer) {
+    if (userGuess.value === foundedAnswer.correctAnswer) {
       // Add class name to the correct answer 
       userGuess.classList.add('true');
       foundedAnswer.isCorrect = true;
@@ -33988,20 +34081,22 @@ function useFunctionalities() {
 
 
   function handleNextButton(e) {
-    fetchData();
+    const userGuess = e.target.value;
+    const foundedAnswer = quizData.find(quiz => quiz.correctAnswer);
+
+    if (userGuess === foundedAnswer.correctAnswer) {
+      fetchData();
+    }
   } // Handle next button
 
 
   function handleTryAgain(e) {
     const nextBtn = e.target.value;
     const foundedAnswer = quizData.find(quiz => quiz.correctAnswer);
-    console.log(foundedAnswer);
     const buttons = Array.from(document.querySelectorAll(".btn"));
     const findTrueBtn = buttons.find(button => button.value === foundedAnswer.correctAnswer);
   }
 
-  console.log(quizScore);
-  console.log(quizData);
   return [quizData, nextbutton, isNextPageShown, quizScore, setScore, isScoreShown, handleClick, handleNextButton, handleTryAgain];
 }
 
@@ -34015,11 +34110,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ContextProvider = require("../ContextProvider");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function DisplayQuiz({
   background,
@@ -34046,24 +34145,24 @@ function DisplayQuiz({
     className: "btn",
     value: answers[0],
     onClick: onClick
-  }, /*#__PURE__*/_react.default.createElement("span", null, "A"), /*#__PURE__*/_react.default.createElement("span", null, answers[0]), /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, "A"), /*#__PURE__*/_react.default.createElement("div", null, answers[0]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     value: answers[1],
     onClick: onClick
-  }, /*#__PURE__*/_react.default.createElement("span", null, "B"), /*#__PURE__*/_react.default.createElement("span", null, answers[1]), /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, "B"), /*#__PURE__*/_react.default.createElement("div", null, answers[1]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     value: answers[2],
     onClick: onClick
-  }, /*#__PURE__*/_react.default.createElement("span", null, "C"), /*#__PURE__*/_react.default.createElement("span", null, answers[2]), /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("div", null, "C"), /*#__PURE__*/_react.default.createElement("div", null, answers[2]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     value: answers[3],
     onClick: onClick
-  }, /*#__PURE__*/_react.default.createElement("span", null, "D"), /*#__PURE__*/_react.default.createElement("span", null, answers[3]), /*#__PURE__*/_react.default.createElement("span", null, icon))));
+  }, /*#__PURE__*/_react.default.createElement("div", null, "D"), /*#__PURE__*/_react.default.createElement("div", null, answers[3]), /*#__PURE__*/_react.default.createElement("div", null, icon))));
 }
 
 var _default = DisplayQuiz;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js"}],"components/pages/NextButton.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../ContextProvider":"components/ContextProvider.js"}],"components/pages/NextButton.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34071,21 +34170,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
 var _useFunctionalities = _interopRequireDefault(require("../customHooks/useFunctionalities"));
 
+var _ContextProvider = require("../ContextProvider");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 function NextButton({
-  isCorrect,
   correctAnswer,
   nextButtonOnClick,
   clickNextBtn
 }) {
-  const [quizData, nextbutton, isNextPageShown, quizScore, setScore, isScoreShown, handleClick, handleNextButton, handleTryAgain] = (0, _useFunctionalities.default)();
+  const {
+    isCorrect,
+    quizScore,
+    setSCore
+  } = (0, _react.useContext)(_ContextProvider.Context);
+  console.log(isCorrect);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCorrect ? /*#__PURE__*/_react.default.createElement("button", {
     value: correctAnswer,
     className: "next-button",
@@ -34095,14 +34204,13 @@ function NextButton({
     to: "/tryagain"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "next-button",
-    value: correctAnswer,
-    onClick: handleTryAgain
+    value: correctAnswer
   }, "Next")));
 }
 
 var _default = NextButton;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js"}],"wini.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","../ContextProvider":"components/ContextProvider.js"}],"wini.svg":[function(require,module,exports) {
 module.exports = "/wini.56f298e9.svg";
 },{}],"components/pages/TryAgain.js":[function(require,module,exports) {
 "use strict";
@@ -34112,7 +34220,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _useFunctionalities = _interopRequireDefault(require("../customHooks/useFunctionalities"));
 
@@ -34120,14 +34228,29 @@ var _reactRouterDom = require("react-router-dom");
 
 var _wini = _interopRequireDefault(require("../../wini.svg"));
 
+var _ContextProvider = require("../ContextProvider");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function TryAgain({
-  score,
-  onClick
-}) {
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function TryAgain() {
   // Grab custom hooks
-  const [quizData, nextbutton, isNextPageShown, quizScore, setScore, isScoreShown, handleClick, handleNextButton, handleTryAgain] = (0, _useFunctionalities.default)();
+  const {
+    isCorrect,
+    quizData,
+    nextbutton,
+    isNextPageShown,
+    quizScore,
+    setSCore,
+    isScoreShown,
+    handleClick,
+    handleNextButton,
+    handleTryAgain
+  } = (0, _react.useContext)(_ContextProvider.Context);
+  console.log(quizScore);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isScoreShown && /*#__PURE__*/_react.default.createElement("div", {
     className: "container result"
   }, /*#__PURE__*/_react.default.createElement("img", {
@@ -34138,7 +34261,7 @@ function TryAgain({
   }, "Result"), /*#__PURE__*/_react.default.createElement("p", {
     className: "result--text"
   }, "You got ", /*#__PURE__*/_react.default.createElement("span", null, quizScore), " correct answers"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/backtohome"
+    to: "/"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "result--button"
   }, "Try again"))));
@@ -34146,7 +34269,7 @@ function TryAgain({
 
 var _default = TryAgain;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../../wini.svg":"wini.svg"}],"components/pages/HomePage.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../../wini.svg":"wini.svg","../ContextProvider":"components/ContextProvider.js"}],"components/pages/HomePage.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34154,7 +34277,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _useFunctionalities = _interopRequireDefault(require("../customHooks/useFunctionalities"));
 
@@ -34164,12 +34287,29 @@ var _NextButton = _interopRequireDefault(require("./NextButton"));
 
 var _TryAgain = _interopRequireDefault(require("./TryAgain"));
 
+var _ContextProvider = require("../ContextProvider");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function HomePage() {
-  const [quizData, nextbutton, isNextPageShown, quizScore, setScore, isScoreShown, handleClick, handleNextButton, handleTryAgain] = (0, _useFunctionalities.default)();
+  const {
+    isCorrect,
+    quizData,
+    nextbutton,
+    isNextPageShown,
+    quizScore,
+    setSCore,
+    isScoreShown,
+    handleClick,
+    handleNextButton,
+    handleTryAgain
+  } = (0, _react.useContext)(_ContextProvider.Context);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "container"
   }, quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, _extends({
@@ -34184,7 +34324,7 @@ function HomePage() {
 
 var _default = HomePage;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","./DisplayQuiz":"components/pages/DisplayQuiz.js","./NextButton":"components/pages/NextButton.js","./TryAgain":"components/pages/TryAgain.js"}],"undraw_adventure_4hum 1.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","./DisplayQuiz":"components/pages/DisplayQuiz.js","./NextButton":"components/pages/NextButton.js","./TryAgain":"components/pages/TryAgain.js","../ContextProvider":"components/ContextProvider.js"}],"undraw_adventure_4hum 1.svg":[function(require,module,exports) {
 module.exports = "/undraw_adventure_4hum 1.50449585.svg";
 },{}],"components/App.js":[function(require,module,exports) {
 "use strict";
@@ -34202,9 +34342,9 @@ var _HomePage = _interopRequireDefault(require("./pages/HomePage"));
 
 var _TryAgain = _interopRequireDefault(require("./pages/TryAgain"));
 
-var _useFunctionalities = _interopRequireDefault(require("./customHooks/useFunctionalities"));
-
 var _undraw_adventure_4hum = _interopRequireDefault(require("../undraw_adventure_4hum 1.svg"));
+
+var _ContextProvider = require("./ContextProvider");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34213,7 +34353,18 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function App() {
-  const [isCorrect, quizData, nextbutton, isNextPageShown, quizScore, setSCore, isScoreShown, handleClick, handleNextButton, handleTryAgain] = (0, _useFunctionalities.default)();
+  const {
+    isCorrect,
+    quizData,
+    nextbutton,
+    isNextPageShown,
+    quizScore,
+    setSCore,
+    isScoreShown,
+    handleClick,
+    handleNextButton,
+    handleTryAgain
+  } = (0, _react.useContext)(_ContextProvider.Context);
   return /*#__PURE__*/_react.default.createElement("article", {
     className: "quiz-container"
   }, /*#__PURE__*/_react.default.createElement("h1", null, "Country Quiz"), /*#__PURE__*/_react.default.createElement("img", {
@@ -34225,27 +34376,29 @@ function App() {
     path: "/"
   }, /*#__PURE__*/_react.default.createElement(_HomePage.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     path: "/tryagain"
-  }, !isNextPageShown && /*#__PURE__*/_react.default.createElement(_TryAgain.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    path: "/backtohome"
-  }, /*#__PURE__*/_react.default.createElement(_HomePage.default, null)))));
+  }, !isNextPageShown && /*#__PURE__*/_react.default.createElement(_TryAgain.default, null)))), /*#__PURE__*/_react.default.createElement("div", {
+    className: "builder"
+  }, "By Tokiniaina Fanilo \xA9 2020"));
 }
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./pages/HomePage":"components/pages/HomePage.js","./pages/TryAgain":"components/pages/TryAgain.js","./customHooks/useFunctionalities":"components/customHooks/useFunctionalities.js","../undraw_adventure_4hum 1.svg":"undraw_adventure_4hum 1.svg"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./pages/HomePage":"components/pages/HomePage.js","./pages/TryAgain":"components/pages/TryAgain.js","../undraw_adventure_4hum 1.svg":"undraw_adventure_4hum 1.svg","./ContextProvider":"components/ContextProvider.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
+var _ContextProvider = require("./components/ContextProvider");
+
 var _App = _interopRequireDefault(require("./components/App"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import { BrowserRouter as Router} from 'react-router-dom';
-_reactDom.default.render( /*#__PURE__*/_react.default.createElement(_App.default, null), document.getElementById('root'));
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./components/App":"components/App.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_reactDom.default.render( /*#__PURE__*/_react.default.createElement(_ContextProvider.ContextProvider, null, /*#__PURE__*/_react.default.createElement(_App.default, null)), document.getElementById('root'));
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./components/ContextProvider":"components/ContextProvider.js","./components/App":"components/App.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -34273,7 +34426,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53428" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58237" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

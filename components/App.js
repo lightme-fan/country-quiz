@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+
 import HomePage from './pages/HomePage';
 import TryAgain from './pages/TryAgain';
-import useFunctionalities from './customHooks/useFunctionalities'
 import quiz from '../undraw_adventure_4hum 1.svg'
+import { Context } from './ContextProvider'
 
 function App() {
-    const [
+    const {
         isCorrect, 
         quizData, 
         nextbutton, 
@@ -17,8 +18,8 @@ function App() {
         handleClick, 
         handleNextButton,
         handleTryAgain
-    ] = useFunctionalities()
-
+     } = useContext(Context)
+    
     return (        
         <article className='quiz-container'>
             <h1>Country Quiz</h1>
@@ -31,11 +32,9 @@ function App() {
                     <Route path='/tryagain'>
                         {!isNextPageShown && <TryAgain />}
                     </Route>
-                    <Route path='/backtohome'>
-                        <HomePage/>
-                    </Route>
                 </Switch>
             </Router>
+            <div className='builder'>By Tokiniaina Fanilo © 2020</div>
         </article>
     )
 }

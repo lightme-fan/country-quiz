@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import useFunctionalities from '../customHooks/useFunctionalities'
 import DisplayQuiz from './DisplayQuiz';
 import NextButton from './NextButton';
 import TryAgain from './TryAgain'
 
+import { Context } from '../ContextProvider'
+
 function HomePage() {
-    const [ 
+    const {
+        isCorrect, 
         quizData, 
         nextbutton, 
         isNextPageShown, 
         quizScore, 
-        setScore, 
+        setSCore, 
         isScoreShown,
         handleClick, 
         handleNextButton,
         handleTryAgain
-    ] = useFunctionalities()
+     } = useContext(Context)
 
     return (
         <div className='container'>

@@ -1,6 +1,7 @@
 body {
-    background-color: blue;
-    /* background-image: url('https://country-quiz-app.netlify.app/static/media/background.7e2f750c.png"'); */
+    background-image: url('https://bit.ly/2VXTcGq');
+    background-repeat: no-repeat;
+    background-position: 100%;
 }
 
 .quiz-container {
@@ -55,11 +56,11 @@ button {
     background-color: #F9A826;
 }
 
-.untrue {
+.untrue, .untrue > div {
     background-color: #EA8282;
 }
 
-.true {
+.true, .true > div {
     background-color: #60BF88;
 }
 
@@ -111,6 +112,13 @@ button {
 
 .result > img {
     margin-top: 2rem;
+}
+.builder {
+    text-align: center;
+    margin-top: 2rem;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.5rem;
 }
 
 /*# sourceMappingURL=/country-quiz.9ad09f98.css.map */
