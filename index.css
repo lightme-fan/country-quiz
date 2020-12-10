@@ -1,5 +1,5 @@
 body {
-    background-image: url('https://bit.ly/2VXTcGq');
+    background-image: url('./background.png');
     background-repeat: no-repeat;
     background-position: 100%;
 }
@@ -55,13 +55,25 @@ button {
 .buttons > button:hover {
     background-color: #F9A826;
 }
-
-.untrue, .untrue > div {
+ 
+.untrue {
     background-color: #EA8282;
+    background-image: url('./icons/incorrect.svg');
+    background-repeat: no-repeat;
+    background-position: 98%;
+    background-size: 6%;
 }
 
-.true, .true > div {
+.true {
     background-color: #60BF88;
+    background-image: url('./icons/correct.svg');
+    background-repeat: no-repeat;
+    background-position: 98%;
+    background-size: 6%;
+}
+
+.untrue:hover, .true:hover {
+    background-color: initial;
 }
 
 .next-button {

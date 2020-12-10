@@ -29806,13 +29806,13 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const API_url = 'https://restcountries.eu/rest/v2/all';
+const API_URL = 'https://restcountries.eu/rest/v2/all';
 
 function FetchingData() {
   const [quizData, setQuizData] = (0, _react.useState)([]);
 
   async function fetchData(id) {
-    const response = await fetch(API_url);
+    const response = await fetch(API_URL);
     const result = await response.json(); // Randomizing questions
 
     const randomQuestion = _QuizQuestion.default[Math.floor(Math.random() * _QuizQuestion.default.length)]; // Randomizing answers
@@ -29881,7 +29881,12 @@ function ContextProvider({
   const [nextbutton, setNextbutton] = (0, _react.useState)(false);
   const [isNextPageShown, setNextPage] = (0, _react.useState)(false);
   const [isScoreShown, setShowScore] = (0, _react.useState)(false);
-  const [isCorrect, setIsCorrect] = (0, _react.useState)(false);
+  const [isCorrect, setIsCorrect] = (0, _react.useState)(false); // let buttonRef = useRef(null)
+  // const [ buttons, setButtons ] = useState()
+  // useEffect(() => {
+  //     setButtons(buttonRef.current.background)
+  // }, [])
+  // console.log(buttons);
 
   function handleClick(e) {
     const userGuess = e.target;
@@ -29912,20 +29917,16 @@ function ContextProvider({
 
       buttons.map(button => button.classList.add('disabledButton'));
     }
-  }
+  } // Handle next button
 
-  console.log(quizData); // Handle next button
 
   function handleNextButton(e) {
     fetchData();
-    console.log(e.target.value);
   }
 
   function handleTryAgain(e) {
-    const nextBtn = e.target.value;
-    const foundedAnswer = quizData.find(quiz => quiz.correctAnswer);
-    const buttons = Array.from(document.querySelectorAll(".btn"));
-    const findTrueBtn = buttons.find(button => button.value === foundedAnswer.correctAnswer);
+    fetchData();
+    setScore(0);
   }
 
   return /*#__PURE__*/_react.default.createElement(Context.Provider, {
@@ -34129,7 +34130,8 @@ function DisplayQuiz({
   capital,
   answers,
   onClick,
-  icon
+  icon,
+  buttonRef
 }) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, question.question1 ? /*#__PURE__*/_react.default.createElement("h3", {
     className: "question"
@@ -34143,18 +34145,22 @@ function DisplayQuiz({
     className: "buttons"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
+    ref: buttonRef,
     value: answers[0],
     onClick: onClick
   }, /*#__PURE__*/_react.default.createElement("div", null, "A"), /*#__PURE__*/_react.default.createElement("div", null, answers[0]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
+    ref: buttonRef,
     value: answers[1],
     onClick: onClick
   }, /*#__PURE__*/_react.default.createElement("div", null, "B"), /*#__PURE__*/_react.default.createElement("div", null, answers[1]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
+    ref: buttonRef,
     value: answers[2],
     onClick: onClick
   }, /*#__PURE__*/_react.default.createElement("div", null, "C"), /*#__PURE__*/_react.default.createElement("div", null, answers[2]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
+    ref: buttonRef,
     value: answers[3],
     onClick: onClick
   }, /*#__PURE__*/_react.default.createElement("div", null, "D"), /*#__PURE__*/_react.default.createElement("div", null, answers[3]), /*#__PURE__*/_react.default.createElement("div", null, icon))));
@@ -34194,7 +34200,6 @@ function NextButton({
     quizScore,
     setSCore
   } = (0, _react.useContext)(_ContextProvider.Context);
-  console.log(isCorrect);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCorrect ? /*#__PURE__*/_react.default.createElement("button", {
     value: correctAnswer,
     className: "next-button",
@@ -34251,7 +34256,7 @@ function TryAgain() {
     handleTryAgain
   } = (0, _react.useContext)(_ContextProvider.Context);
   console.log(quizScore);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !isScoreShown && /*#__PURE__*/_react.default.createElement("div", {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "container result"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: _wini.default,
@@ -34263,7 +34268,8 @@ function TryAgain() {
   }, "You got ", /*#__PURE__*/_react.default.createElement("span", null, quizScore), " correct answers"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "result--button"
+    className: "result--button",
+    onClick: handleTryAgain
   }, "Try again"))));
 }
 
@@ -34426,7 +34432,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58237" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

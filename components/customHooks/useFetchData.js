@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import quizQuestions from '../pages/Quiz-question'
-const API_url = 'https://restcountries.eu/rest/v2/all'
+const API_URL = 'https://restcountries.eu/rest/v2/all'
 
 function FetchingData() {
     const [ quizData, setQuizData ] = useState([]) 
 
     async function fetchData(id) {
-        const response = await fetch(API_url)
+        const response = await fetch(API_URL)
         const result = await response.json()
 
         // Randomizing questions

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useRef, useState } from 'react'
 import useFetchData from './customHooks/useFetchData';
 
 const Context = createContext()
@@ -10,11 +10,20 @@ function ContextProvider({children}) {
     const [ isNextPageShown, setNextPage ] = useState(false)
     const [ isScoreShown, setShowScore ] = useState(false)
     const [ isCorrect, setIsCorrect ] = useState(false)
+    
+    // let buttonRef = useRef(null)
+    // const [ buttons, setButtons ] = useState()
+
+    // useEffect(() => {
+    //     setButtons(buttonRef.current.background)
+    // }, [])
+
+    // console.log(buttons);
 
     function handleClick(e) {
         const userGuess = e.target
         setNextbutton(true)
-        
+
         // Grab the four buttons
         const buttons = Array.from(document.querySelectorAll(".btn"))
         
@@ -46,18 +55,14 @@ function ContextProvider({children}) {
         }       
     }
 
-    console.log(quizData);
     // Handle next button
     function handleNextButton (e) {
         fetchData()
-        console.log(e.target.value);
     }
 
     function handleTryAgain(e) {
-        const nextBtn = e.target.value
-        const foundedAnswer = quizData.find(quiz => quiz.correctAnswer);
-        const buttons = Array.from(document.querySelectorAll(".btn"))
-        const findTrueBtn = buttons.find(button => button.value === foundedAnswer.correctAnswer)
+        fetchData()
+        setScore(0)
     }
 
     return (

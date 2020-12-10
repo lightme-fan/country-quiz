@@ -10,8 +10,7 @@ function NextButton({ correctAnswer, nextButtonOnClick, clickNextBtn }) {
         quizScore, 
         setSCore, 
      } = useContext(Context)
-    console.log(isCorrect);
-
+     
     return (
         <>  
             {isCorrect ?

@@ -23,14 +23,12 @@ function TryAgain() {
     console.log(quizScore);
     return (
         <>
-            {!isScoreShown &&
                 <div className='container result'>
                     <img src={win} alt='quiz'/>
                     <h2 className='result--heading'>Result</h2>
                     <p className='result--text'>You got <span>{quizScore}</span> correct answers</p>
-                    <Link to='/'><button className='result--button'>Try again</button></Link>
+                    <Link to='/'><button className='result--button' onClick={handleTryAgain}>Try again</button></Link>
                 </div>
-            }
         </>
     )
 }
