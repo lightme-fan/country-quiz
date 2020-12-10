@@ -28,7 +28,7 @@
 
 ## Overview
 
-![screenshot](./screenShot.png)
+![screenshot](https://bit.ly/3mix1W9)
 
 You can see my demo by clicking this [link](https://lightme-fan-country-quiz.netlify.app/)
 
