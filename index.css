@@ -118,6 +118,7 @@ button {
     border: none;
     margin-bottom: 0;
     margin-left: 80%;
+    color: #fff;
 }
 .next-button--anchor {
     height: 36px;
@@ -158,10 +159,12 @@ button {
 .result > img {
     margin-top: 2rem;
 }
+
 .builder {
     text-align: center;
     margin-top: 2rem;
-    color: #fff;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 14px;
+    line-height: 17px;
+    color: #F2F2F2;
 }
