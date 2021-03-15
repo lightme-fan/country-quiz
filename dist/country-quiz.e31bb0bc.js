@@ -34143,22 +34143,22 @@ function DisplayQuiz({
     ref: buttonRef,
     value: answers[0],
     onClick: onClick
-  }, /*#__PURE__*/_react.default.createElement("div", null, "A"), /*#__PURE__*/_react.default.createElement("div", null, answers[0]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, "A"), answers[0], /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     ref: buttonRef,
     value: answers[1],
     onClick: onClick
-  }, /*#__PURE__*/_react.default.createElement("div", null, "B"), /*#__PURE__*/_react.default.createElement("div", null, answers[1]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, "B"), answers[1], /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     ref: buttonRef,
     value: answers[2],
     onClick: onClick
-  }, /*#__PURE__*/_react.default.createElement("div", null, "C"), /*#__PURE__*/_react.default.createElement("div", null, answers[2]), /*#__PURE__*/_react.default.createElement("div", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
+  }, /*#__PURE__*/_react.default.createElement("span", null, "C"), answers[2], /*#__PURE__*/_react.default.createElement("span", null, icon)), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("button", {
     className: "btn",
     ref: buttonRef,
     value: answers[3],
     onClick: onClick
-  }, /*#__PURE__*/_react.default.createElement("div", null, "D"), /*#__PURE__*/_react.default.createElement("div", null, answers[3]), /*#__PURE__*/_react.default.createElement("div", null, icon))));
+  }, /*#__PURE__*/_react.default.createElement("span", null, "D"), answers[3], /*#__PURE__*/_react.default.createElement("span", null, icon))));
 }
 
 var _default = DisplayQuiz;
@@ -34427,7 +34427,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55107" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49261" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

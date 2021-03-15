@@ -13,27 +13,27 @@ function DisplayQuiz({background, flag, question, correctAnswer, classList, capi
             }
             <div className='buttons'>
                 <button className='btn'  ref={buttonRef} value={answers[0]} onClick={onClick}>
-                    <div>A</div>
-                    <div>{answers[0]}</div>
-                    <div>{icon}</div>
+                    <span>A</span>
+                    {answers[0]}
+                    <span>{icon}</span>
                 </button><br/>
 
                 <button className='btn'  ref={buttonRef} value={answers[1]} onClick={onClick}>
-                    <div>B</div>
-                    <div>{answers[1]}</div>   
-                    <div>{icon}</div>
+                    <span>B</span>
+                    {answers[1]}   
+                    <span>{icon}</span>
                 </button><br/>
 
                 <button className='btn'  ref={buttonRef} value={answers[2]} onClick={onClick}>
-                    <div>C</div>
-                    <div>{answers[2]}</div>
-                    <div>{icon}</div>
+                    <span>C</span>
+                    {answers[2]}
+                    <span>{icon}</span>
                 </button><br/>
 
                 <button className='btn'  ref={buttonRef} value={answers[3]} onClick={onClick}>
-                    <div>D</div>
-                    <div>{answers[3]}</div>
-                    <div>{icon}</div>
+                    <span>D</span>
+                    {answers[3]}
+                    <span>{icon}</span>
                 </button>
             </div>
         </>
