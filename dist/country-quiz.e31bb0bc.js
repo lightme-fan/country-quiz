@@ -29881,12 +29881,7 @@ function ContextProvider({
   const [nextbutton, setNextbutton] = (0, _react.useState)(false);
   const [isNextPageShown, setNextPage] = (0, _react.useState)(false);
   const [isScoreShown, setShowScore] = (0, _react.useState)(false);
-  const [isCorrect, setIsCorrect] = (0, _react.useState)(false); // let buttonRef = useRef(null)
-  // const [ buttons, setButtons ] = useState()
-  // useEffect(() => {
-  //     setButtons(buttonRef.current.background)
-  // }, [])
-  // console.log(buttons);
+  const [isCorrect, setIsCorrect] = (0, _react.useState)(false);
 
   function handleClick(e) {
     const userGuess = e.target;
@@ -34432,7 +34427,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52360" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56872" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -11,15 +11,6 @@ function ContextProvider({children}) {
     const [ isScoreShown, setShowScore ] = useState(false)
     const [ isCorrect, setIsCorrect ] = useState(false)
     
-    // let buttonRef = useRef(null)
-    // const [ buttons, setButtons ] = useState()
-
-    // useEffect(() => {
-    //     setButtons(buttonRef.current.background)
-    // }, [])
-
-    // console.log(buttons);
-
     function handleClick(e) {
         const userGuess = e.target
         setNextbutton(true)

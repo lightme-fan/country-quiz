@@ -1,7 +1,28 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('/Poppins-Bold.2749a141.woff2') format('woff2'),
+        url('/Poppins-Bold.862ba13a.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/Poppins-Regular.9e42f474.woff2') format('woff2'),
+        url('/Poppins-Regular.6403b602.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 body {
     background-image: url('/background.e3ad310f.png');
     background-repeat: no-repeat;
-    background-position: 100%;
+    background-position: 50%;
+    background-size: cover;
+    font-family: 'Poppins';
 }
 
 .quiz-container {
@@ -54,6 +75,12 @@ button {
 
 .buttons > button:hover {
     background-color: #F9A826;
+    color: #fff;
+    border: none;
+}
+
+.buttons > button:active {
+    color: #fff;
 }
  
 .untrue {
@@ -62,6 +89,7 @@ button {
     background-repeat: no-repeat;
     background-position: 98%;
     background-size: 6%;
+    color: #fff;
 }
 
 .true {
@@ -70,10 +98,15 @@ button {
     background-repeat: no-repeat;
     background-position: 98%;
     background-size: 6%;
+    color: #fff;
 }
 
-.untrue:hover, .true:hover {
-    background-color: initial;
+.untrue:hover {
+    background-color: #EA8282;
+} 
+
+.true:hover {
+        background-color: #60BF88;
 }
 
 .next-button {

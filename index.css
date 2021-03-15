@@ -1,7 +1,28 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('./fonts/Poppins-Bold.woff2') format('woff2'),
+        url('./fonts/Poppins-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('./fonts/Poppins-Regular.woff2') format('woff2'),
+        url('./fonts/Poppins-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 body {
     background-image: url('./background.png');
     background-repeat: no-repeat;
-    background-position: 100%;
+    background-position: 50%;
+    background-size: cover;
+    font-family: 'Poppins';
 }
 
 .quiz-container {
@@ -54,6 +75,12 @@ button {
 
 .buttons > button:hover {
     background-color: #F9A826;
+    color: #fff;
+    border: none;
+}
+
+.buttons > button:active {
+    color: #fff;
 }
  
 .untrue {
@@ -62,6 +89,7 @@ button {
     background-repeat: no-repeat;
     background-position: 98%;
     background-size: 6%;
+    color: #fff;
 }
 
 .true {
@@ -70,10 +98,15 @@ button {
     background-repeat: no-repeat;
     background-position: 98%;
     background-size: 6%;
+    color: #fff;
 }
 
-.untrue:hover, .true:hover {
-    background-color: initial;
+.untrue:hover {
+    background-color: #EA8282;
+} 
+
+.true:hover {
+        background-color: #60BF88;
 }
 
 .next-button {
