@@ -21,7 +21,7 @@ body {
     background-image: url('./background.png');
     background-repeat: no-repeat;
     background-position: 50%;
-    background-size: cover;
+    /* background-size: 100%; */
     font-family: 'Poppins';
 }
 
