@@ -17,16 +17,18 @@ function ContextProvider({children}) {
 
         // Grab the four buttons
         const buttons = Array.from(document.querySelectorAll(".btn"))
-        
+        console.log(buttons);
         // Find the right answer in order to compare with the value of each button
         const foundedAnswer = quizData.find(quiz => quiz.correctAnswer)
-
+        
         // Comparison if what is clicked and the correct answer are the same
+        // buttons.classList.add('disabledButton')
         if (userGuess.value === foundedAnswer.correctAnswer) {
             // Add class name to the correct answer 
             setScore(prev => prev + 1)
             userGuess.classList.add('true')
             setIsCorrect(true)
+            buttons.map(button => button.classList.add('disabledButton'))
         }
         
         // Comparison if what is clicked and the correct answer are not the same
@@ -44,6 +46,8 @@ function ContextProvider({children}) {
             // To disable all buttons once one of them is clicked
             buttons.map(button => button.classList.add('disabledButton'))
         }       
+        buttons.map(button => button.classList.add('stop-hovering'))
+
     }
 
     // Handle next button

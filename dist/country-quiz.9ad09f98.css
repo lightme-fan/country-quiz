@@ -72,6 +72,7 @@ button {
     display: flex;
     align-items: center;
     gap: 46px;
+    outline: none;
 }
 
 .buttons > button:hover {
@@ -83,31 +84,33 @@ button {
 .buttons > button:active {
     color: #fff;
 }
- 
-.untrue {
+
+.stop-hovering {
+    cursor: default;
+}
+
+/* .stop-hovering:hover {
+    background-color: none;
+} */
+
+ .untrue, .untrue:hover > button {
     background-color: #EA8282;
     background-image: url('/incorrect.881b3c98.svg');
     background-repeat: no-repeat;
     background-position: 98%;
     background-size: 6%;
     color: #fff;
+    border-color: #EA8282;
 }
 
-.true {
+.true, .true:hover > button {
     background-color: #60BF88;
     background-image: url('/correct.bbe86b11.svg');
     background-repeat: no-repeat;
     background-position: 98%;
     background-size: 6%;
     color: #fff;
-}
-
-.untrue:hover {
-    background-color: #EA8282;
-} 
-
-.true:hover {
-        background-color: #60BF88;
+    border-color: #60BF88;
 }
 
 .next-button {
@@ -121,6 +124,7 @@ button {
     margin-left: 80%;
     color: #fff;
 }
+
 .next-button--anchor {
     height: 36px;
     width: 20%;
@@ -155,6 +159,7 @@ button {
     /* outline: none; */
     pointer-events: none;
     cursor: default;
+    /* background-color: unset; */
 }
 
 .result > img {
