@@ -29896,7 +29896,7 @@ function ContextProvider({
     if (userGuess.value === foundedAnswer.correctAnswer) {
       // Add class name to the correct answer 
       setScore(prev => prev + 1);
-      userGuess.classList.add('true');
+      userGuess.setAttribute('id', 'true');
       setIsCorrect(true);
       buttons.map(button => button.classList.add('disabledButton'));
     } // Comparison if what is clicked and the correct answer are not the same
@@ -29904,12 +29904,12 @@ function ContextProvider({
 
     if (userGuess.value !== foundedAnswer.correctAnswer) {
       // Add class name to the incorrect answer
-      userGuess.classList.add('untrue');
+      userGuess.setAttribute('id', 'untrue');
       setIsCorrect(false); // Show the correct answer if what has been clicked is not the correct answer
 
       setTimeout(() => {
         const findTrueBtn = buttons.find(button => button.value === foundedAnswer.correctAnswer);
-        findTrueBtn.classList.add('true');
+        findTrueBtn.setAttribute('id', 'true');
       }, 700);
       setShowScore(true); // To disable all buttons once one of them is clicked
 
@@ -34432,7 +34432,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54154" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64661" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

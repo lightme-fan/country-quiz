@@ -66,7 +66,7 @@ button {
     cursor: pointer;
 }
 
-.buttons > button {
+.buttons button {
     width: 100%;
     height: 56px;
     display: flex;
@@ -75,7 +75,7 @@ button {
     outline: none;
 }
 
-.buttons > button:hover {
+.buttons .btn:hover {
     background-color: #F9A826;
     color: #fff;
     border: none;
@@ -85,15 +85,7 @@ button {
     color: #fff;
 }
 
-.stop-hovering {
-    cursor: default;
-}
-
-/* .stop-hovering:hover {
-    background-color: none;
-} */
-
- .untrue, .untrue:hover > button {
+#untrue, #untrue:hover {
     background-color: #EA8282;
     background-image: url('./icons/incorrect.svg');
     background-repeat: no-repeat;
@@ -103,7 +95,7 @@ button {
     border-color: #EA8282;
 }
 
-.true, .true:hover > button {
+#true, #true:hover {
     background-color: #60BF88;
     background-image: url('./icons/correct.svg');
     background-repeat: no-repeat;
@@ -156,10 +148,8 @@ button {
 }
 
 .disabledButton {
-    /* outline: none; */
     pointer-events: none;
     cursor: default;
-    /* background-color: unset; */
 }
 
 .result > img {
