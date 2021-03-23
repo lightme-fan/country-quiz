@@ -11,6 +11,7 @@ function HomePage() {
         isCorrect, 
         quizData, 
         nextbutton, 
+        isButtonClicked,
         isNextPageShown, 
         quizScore, 
         setSCore, 
@@ -21,7 +22,7 @@ function HomePage() {
      } = useContext(Context)
 
     return (
-        <div className='container'>
+        <div className='container' id={nextbutton ? "increase-padding" : undefined}>
             {
                 quizData.map(quiz =>                    
                 <DisplayQuiz onClick={handleClick} key={quiz.capital} {...quiz}/>

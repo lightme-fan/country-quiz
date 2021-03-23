@@ -21,12 +21,12 @@ body {
     background-image: url('./background.png');
     background-repeat: no-repeat;
     background-position: 50%;
-    background-size: cover;
     font-family: 'Poppins';
 }
 
 .quiz-container {
-    max-width: 485px;
+    max-width: 464px;
+    max-height: 559px;
     margin: auto;
     position: relative;
     margin-top: 3rem;
@@ -34,21 +34,37 @@ body {
 
 .container {
     background-color: #fff;
-    padding: 1rem;
-    border-radius: 24px;
-    padding-top: 68px;
+    padding: 68px 32px;
+    border-radius: 24px;    
+    -webkit-border-radius: 24px;
+    -moz-border-radius: 24px;
+    -ms-border-radius: 24px;
+    -o-border-radius: 24px;
+    display: flex;
+    flex-direction: column;
 }
 
 .quiz-img {
     position: absolute;
     top: -10px;
-    left: 58%;
-    width: 150px;
+    left: 65%;
+    width: 162px;
+    height: 116px;
 }
 
 h1 {
+    font-size: 36px;
+    line-height: 54px;
     text-transform: uppercase;
-    color: #fff;
+    color: #F2F2F2;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.question {
+    font-size: 24px;
+    color: #2F527B;
+    margin-bottom: 32px;
 }
 
 .question-image {
@@ -60,19 +76,23 @@ h1 {
 
 button {
     border-radius: 12px;
-    margin-bottom: 16px;
     color: rgba(96, 102, 208, 0.8);
     border: 2px solid rgba(96, 102, 208, 0.7);
     cursor: pointer;
 }
 
 .buttons button {
-    width: 100%;
+    max-width: 400px;
     height: 56px;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 46px;
     outline: none;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
 }
 
 .buttons .btn:hover {
@@ -108,18 +128,23 @@ button {
 .next-button {
     height: 36px;
     background: #F9A826;
-    width: 20%;
+    width: 116px;
+    height: 56px;
     border-radius: 12px;
     box-shadow: 0px 2px 4px rgba(252, 168, 47, 0.4);
     border: none;
+    margin-top: 24px;
     margin-bottom: 0;
-    margin-left: 80%;
     color: #fff;
+    font-size: 18px;
 }
 
-.next-button--anchor {
-    height: 36px;
-    width: 20%;
+.next-button--anchor, .next-button {
+    align-self: flex-end;
+}
+
+#increase-padding {
+    padding-bottom: 32px;
 }
 
 .all-button {
@@ -128,22 +153,39 @@ button {
 
 .result {
     text-align: center;
+    padding: 32px;
+    max-height: 542px;
 }
 
 .result--heading {
-    padding-top: 57px;
-    text-transform: uppercase;
+    font-size: 48px;
+    line-height: 72px;
+    padding-top: 72px;
+    padding-bottom: 22px;
+    margin: 0;
 }
 
 .result--button {
     width: 33%;
     height: 48px;
     margin-top: 25px;
+    background-color: #fff;
+    border: 2px solid #1D355D;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: #1D355D;
+}
+
+.result--text {
+    font-size: 18px;
+    line-height: 27px;
+    color: #1D355D;
 }
 
 .result--text > span {
     color: #60BF88;
-    font-size: 2rem;
+    font-size: 42px;
     font-weight: 700;
 }
 
@@ -154,6 +196,9 @@ button {
 
 .result > img {
     margin-top: 2rem;
+    max-width: 238px;
+    width: 100%;
+    align-self: center;
 }
 
 .builder {

@@ -29882,9 +29882,11 @@ function ContextProvider({
   const [isNextPageShown, setNextPage] = (0, _react.useState)(false);
   const [isScoreShown, setShowScore] = (0, _react.useState)(false);
   const [isCorrect, setIsCorrect] = (0, _react.useState)(false);
+  const [isButtonClicked, setIsButtonClicked] = (0, _react.useState)(false);
 
   function handleClick(e) {
     const userGuess = e.target;
+    setIsButtonClicked(true);
     setNextbutton(true); // Grab the four buttons
 
     const buttons = Array.from(document.querySelectorAll(".btn"));
@@ -29936,6 +29938,7 @@ function ContextProvider({
       nextbutton,
       isNextPageShown,
       quizScore,
+      isButtonClicked,
       setScore,
       isScoreShown,
       handleClick,
@@ -34255,7 +34258,6 @@ function TryAgain() {
     handleNextButton,
     handleTryAgain
   } = (0, _react.useContext)(_ContextProvider.Context);
-  console.log(quizScore);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "container result"
   }, /*#__PURE__*/_react.default.createElement("img", {
@@ -34263,7 +34265,7 @@ function TryAgain() {
     alt: "quiz"
   }), /*#__PURE__*/_react.default.createElement("h2", {
     className: "result--heading"
-  }, "Result"), /*#__PURE__*/_react.default.createElement("p", {
+  }, "Results"), /*#__PURE__*/_react.default.createElement("p", {
     className: "result--text"
   }, "You got ", /*#__PURE__*/_react.default.createElement("span", null, quizScore), " correct answers"), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
@@ -34308,6 +34310,7 @@ function HomePage() {
     isCorrect,
     quizData,
     nextbutton,
+    isButtonClicked,
     isNextPageShown,
     quizScore,
     setSCore,
@@ -34317,7 +34320,8 @@ function HomePage() {
     handleTryAgain
   } = (0, _react.useContext)(_ContextProvider.Context);
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "container"
+    className: "container",
+    id: nextbutton ? "increase-padding" : undefined
   }, quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, _extends({
     onClick: handleClick,
     key: quiz.capital
@@ -34432,7 +34436,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64661" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51282" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

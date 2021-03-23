@@ -10,9 +10,11 @@ function ContextProvider({children}) {
     const [ isNextPageShown, setNextPage ] = useState(false)
     const [ isScoreShown, setShowScore ] = useState(false)
     const [ isCorrect, setIsCorrect ] = useState(false)
+    const [ isButtonClicked, setIsButtonClicked ] = useState(false)
     
     function handleClick(e) {
         const userGuess = e.target
+        setIsButtonClicked(true)
         setNextbutton(true)
 
         // Grab the four buttons
@@ -68,6 +70,7 @@ function ContextProvider({children}) {
                 nextbutton, 
                 isNextPageShown, 
                 quizScore, 
+                isButtonClicked,
                 setScore, 
                 isScoreShown, 
                 handleClick, 

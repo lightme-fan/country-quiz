@@ -19,13 +19,12 @@ function TryAgain() {
         handleNextButton,
         handleTryAgain
      } = useContext(Context)
-     
-    console.log(quizScore);
+
     return (
         <>
                 <div className='container result'>
                     <img src={win} alt='quiz'/>
-                    <h2 className='result--heading'>Result</h2>
+                    <h2 className='result--heading'>Results</h2>
                     <p className='result--text'>You got <span>{quizScore}</span> correct answers</p>
                     <Link to='/'><button className='result--button' onClick={handleTryAgain}>Try again</button></Link>
                 </div>
