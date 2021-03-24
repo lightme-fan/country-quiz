@@ -78,6 +78,7 @@ button {
     border-radius: 12px;
     color: rgba(96, 102, 208, 0.8);
     border: 2px solid rgba(96, 102, 208, 0.7);
+    background-color: #fff;
     cursor: pointer;
 }
 
