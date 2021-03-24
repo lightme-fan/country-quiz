@@ -29923,11 +29923,17 @@ function ContextProvider({
 
 
   function handleNextButton(e) {
-    fetchData();
+    setNextbutton(false);
+    setTimeout(() => {
+      fetchData();
+    }, 200);
   }
 
   function handleTryAgain(e) {
-    fetchData();
+    setNextbutton(false);
+    setTimeout(() => {
+      fetchData();
+    }, 200);
     setScore(0);
   }
 
@@ -34325,11 +34331,11 @@ function HomePage() {
   }, quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, _extends({
     onClick: handleClick,
     key: quiz.capital
-  }, quiz))), nextbutton && quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_NextButton.default, _extends({
+  }, quiz))), isButtonClicked && nextbutton ? quizData.map(quiz => /*#__PURE__*/_react.default.createElement(_NextButton.default, _extends({
     key: quiz.capital
   }, quiz, {
     nextButtonOnClick: handleNextButton
-  }))));
+  }))) : '');
 }
 
 var _default = HomePage;
@@ -34436,7 +34442,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54203" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50168" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

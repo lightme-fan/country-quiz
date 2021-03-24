@@ -28,7 +28,10 @@ function HomePage() {
                 <DisplayQuiz onClick={handleClick} key={quiz.capital} {...quiz}/>
             )}  
 
-            {nextbutton && quizData.map(quiz => <NextButton key={quiz.capital} {...quiz} nextButtonOnClick={handleNextButton} /> )}
+            {isButtonClicked && nextbutton ? 
+                quizData.map(quiz => <NextButton key={quiz.capital} {...quiz} nextButtonOnClick={handleNextButton} /> ) :
+                ''
+            }
         </div>
     )
 }

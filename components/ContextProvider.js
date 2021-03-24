@@ -54,11 +54,17 @@ function ContextProvider({children}) {
 
     // Handle next button
     function handleNextButton (e) {
-        fetchData()
+        setNextbutton(false)
+        setTimeout(() => {            
+            fetchData()
+        }, 200);
     }
 
     function handleTryAgain(e) {
-        fetchData()
+        setNextbutton(false)
+        setTimeout(() => {            
+            fetchData()
+        }, 200);
         setScore(0)
     }
 
