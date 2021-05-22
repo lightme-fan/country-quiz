@@ -4,7 +4,8 @@
   "description": "Challenge: Create a country quiz app using an API, and use React to handle the frontend. Don’t look at the existing solution. Fulfill user stories below:",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html --open"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   ],
   "dependencies": {
     "Q": "^1.0.0",
+    "parcel-bundler": "^1.12.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"
